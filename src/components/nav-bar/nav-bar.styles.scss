@@ -1,0 +1,26 @@
+@import "../assets/color-palate.styles.scss";
+
+.nav-bar {
+    background-color: $color-purple;
+    color: white;
+    height: 50px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 25px;
+    box-shadow: 4px 4px 8px 4px rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  
+    h1 {
+      color: white;
+    }
+    
+    span {
+      margin: auto 10px auto auto;
+      font-size: 1.5rem;
+      // margin-right: 10px;
+    }
+  }
+
+img {
+  width: 100%;
+}

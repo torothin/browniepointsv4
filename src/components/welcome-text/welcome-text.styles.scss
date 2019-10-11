@@ -1,0 +1,15 @@
+#welcome-container {
+    margin: 10px auto;
+    padding: 30px 10px;
+    max-width: 500px;
+    text-align: center;
+    font-size: 20px;
+    color: black;
+    background-color: white;
+    box-shadow:inset 2px 5px 10px #555;
+    border-radius:5px;
+    
+    &p {
+        text-align: center;
+    }
+  }
