@@ -1,21 +1,21 @@
 {
   "files": {
-    "main.css": "/browniepointsv4/static/css/main.d4c97375.chunk.css",
-    "main.js": "/browniepointsv4/static/js/main.f74d8f02.chunk.js",
-    "main.js.map": "/browniepointsv4/static/js/main.f74d8f02.chunk.js.map",
+    "main.css": "/browniepointsv4/static/css/main.7f85f191.chunk.css",
+    "main.js": "/browniepointsv4/static/js/main.434a1300.chunk.js",
+    "main.js.map": "/browniepointsv4/static/js/main.434a1300.chunk.js.map",
     "runtime-main.js": "/browniepointsv4/static/js/runtime-main.34bde011.js",
     "runtime-main.js.map": "/browniepointsv4/static/js/runtime-main.34bde011.js.map",
-    "static/js/2.59e7bd7c.chunk.js": "/browniepointsv4/static/js/2.59e7bd7c.chunk.js",
-    "static/js/2.59e7bd7c.chunk.js.map": "/browniepointsv4/static/js/2.59e7bd7c.chunk.js.map",
+    "static/js/2.94d1715c.chunk.js": "/browniepointsv4/static/js/2.94d1715c.chunk.js",
+    "static/js/2.94d1715c.chunk.js.map": "/browniepointsv4/static/js/2.94d1715c.chunk.js.map",
     "index.html": "/browniepointsv4/index.html",
-    "precache-manifest.292d62e34d5102b04cb2e0d384a8c524.js": "/browniepointsv4/precache-manifest.292d62e34d5102b04cb2e0d384a8c524.js",
+    "precache-manifest.4846a0959bd3c18da4c5027146b28ba0.js": "/browniepointsv4/precache-manifest.4846a0959bd3c18da4c5027146b28ba0.js",
     "service-worker.js": "/browniepointsv4/service-worker.js",
-    "static/css/main.d4c97375.chunk.css.map": "/browniepointsv4/static/css/main.d4c97375.chunk.css.map"
+    "static/css/main.7f85f191.chunk.css.map": "/browniepointsv4/static/css/main.7f85f191.chunk.css.map"
   },
   "entrypoints": [
     "static/js/runtime-main.34bde011.js",
-    "static/js/2.59e7bd7c.chunk.js",
-    "static/css/main.d4c97375.chunk.css",
-    "static/js/main.f74d8f02.chunk.js"
+    "static/js/2.94d1715c.chunk.js",
+    "static/css/main.7f85f191.chunk.css",
+    "static/js/main.434a1300.chunk.js"
   ]
 }
