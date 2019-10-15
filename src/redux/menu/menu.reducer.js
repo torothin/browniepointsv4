@@ -1,7 +1,8 @@
 import { MenuActionTypes } from './menu.types';
 
 const INITIAL_STATE = {
-    menuHidden: true
+    menuHidden: true,
+    menuPopupShow: false,
 };
 
 const menuReducer = (state = INITIAL_STATE, action) => {
@@ -11,6 +12,11 @@ const menuReducer = (state = INITIAL_STATE, action) => {
                 ...state,
                 menuHidden: !state.menuHidden
             };
+        case MenuActionTypes.TOGGLE_MENU_POPUP:
+                return {
+                    ...state,
+                    menuPopupShow: !state.menuPopupShow
+                };
         default:
             return state;
     }

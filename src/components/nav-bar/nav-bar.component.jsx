@@ -8,7 +8,6 @@ import { toggleMenuHidden } from '../../redux/menu/menu.actions';
 import Menu from '../menu/menu.component';
 
 const NavBar = ({currentUser, toggleMenuHidden, menuHidden}) => {
-    console.log(menuHidden);
     return (
         <div className='nav-bar'>
             {/* <div className='menu-button-container' onClick={ toggleMenuHidden }> */}
@@ -23,7 +22,7 @@ const NavBar = ({currentUser, toggleMenuHidden, menuHidden}) => {
             {
                 currentUser && 
                     <CustomButton>
-                        <div onClick={() => {auth.signOut()}}>Sign Out</div>
+                        <div onClick={() => { auth.signOut()} }>Sign Out</div>
                     </CustomButton>
             }
             {

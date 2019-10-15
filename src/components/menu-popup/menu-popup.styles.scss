@@ -1,0 +1,41 @@
+@import '../assets/color-palate.styles.scss';
+
+
+.menu-popup-container {
+    background-color: #0000008f;
+    position: fixed;
+    top:0;
+    left:0;
+    width: 100%;
+    height: 200%;
+    margin:auto;
+    z-index: 1000;
+}
+
+.menu-popup {
+    background-color: $color-light-grey;
+    width: 300px;
+    margin: 150px auto;
+    text-align: center;
+    padding:10px;
+    border-radius: 5px;
+    box-shadow: 4px 4px 8px 4px rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.popup-contents {
+    height: 100px;
+    width: 200px;
+    margin: 10px auto;
+    border: solid 2px blue;
+}
+
+.button-container {
+    display: flex;
+    flex-direction: row;
+    width: 80%;
+    margin: auto;
+
+    #popupButton {
+        margin: auto;
+    }
+}

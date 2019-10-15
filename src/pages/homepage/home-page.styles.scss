@@ -1,0 +1,10 @@
+@import '../../components/assets/color-palate.styles.scss';
+
+.homepage-container {
+    margin: auto;
+    width: 75%;
+    height: 1000px;
+    min-width: 600px;
+    background-color: $color-light-grey;
+    padding-top: 20px;
+}

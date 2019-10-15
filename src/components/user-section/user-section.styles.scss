@@ -1,0 +1,86 @@
+@import '../assets/color-palate.styles.scss';
+
+.user-section {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin: auto;
+}
+
+.user-displayName {
+    background: none;
+    height: 55px;
+    width: 100%;
+    font-size: 50px;
+    border-style: none;
+    text-align: center;
+    padding: 0;
+    text-transform: uppercase;
+}
+
+.progress-bar-container {
+    text-align: center;
+    width: 80%;
+    height:45px; 
+    margin: 20px auto 0px;
+    box-shadow:inset 2px 5px 10px #555;
+    border-radius:10px;
+    display: inline-flex;
+    background-color: $color-white;
+    
+    .current-level-bar {
+        font-size: 30px;
+        vertical-align: middle;
+        text-align: center;
+        background-color: $color-level-bar;
+        color: black;
+        display: flex;
+        border-radius: 10px;
+        float: left;
+    }
+      
+    .progress-bar {
+        background-color: $color-progress-bar;
+        border-radius:10px;
+        display: flex;
+        float: left;
+    }
+}
+
+.level-container {
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    margin: 20px auto;
+    width: 80%;
+
+    .level {
+        height: 150px;
+        width: 200px;
+        font-size: 50px;
+        padding:0px;
+        box-shadow: inset 2px 5px 10px #555;
+        border-radius:10px;
+        background-color: $color-white;
+        vertical-align: center;
+        margin: 0px auto 0px; 
+        
+        div {
+            margin: auto;
+            padding-top: 45px;
+        }
+    }
+    
+    .reward-image {
+        height: 150px;
+        width: 200px;
+        vertical-align: center;
+        margin: 0px auto 0px; 
+        background-size: 100%;
+        background-repeat: no-repeat;
+        background-color:rgb(255, 255, 255);
+        background-position: center;
+        border-radius:10px;
+    }
+}
+
