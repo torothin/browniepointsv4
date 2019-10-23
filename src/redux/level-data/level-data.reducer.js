@@ -11,11 +11,11 @@ const INITIAL_STATE = {
     progressPoints: 90,
     progress: {
         total: 0,
-            todosProgress: 0,
-            dailyProgress: 0,
-            weeklyProgress: 0,
-            monthlyProgress: 0,
-        },
+        todosProgress: 0,
+        dailyProgress: 0,
+        weeklyProgress: 0,
+        monthlyProgress: 0,
+    },
     goalPointTotal: 0, //total points of all the goals to get an average
     currentLevelPercent: 20, //percentage of level completed
     progressLevelPercent: 70

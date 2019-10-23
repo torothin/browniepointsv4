@@ -1,0 +1,8 @@
+@import '../assets/color-palate.styles.scss';
+
+.goal-container {
+    background-color: $color-light-grey;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}

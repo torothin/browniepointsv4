@@ -7,6 +7,7 @@ import SignInSignUp from './pages/sign-in-sign-up/sign-in-sign-up.component';
 
 // components
 import NavBar from './components/nav-bar/nav-bar.component';
+import Footer from './components/footer/footer.component';
 
 // routing
 import { Switch, Route, Redirect } from 'react-router-dom';
@@ -18,6 +19,11 @@ import { connect } from 'react-redux';
 import { setCurrentUser } from './redux/user/user.actions';
 
 class App extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {}
+  }
 
   unsubscribeFromAuth = null
 
@@ -46,22 +52,32 @@ class App extends React.Component {
   }
 
   render() {
+    console.log(this.props.currentUser);
     return (
       <div className="App">
         <NavBar />
         <Switch>
-          <Route exact path='/browniepointsv4' component={ HomePage } /> 
-          {/* <Route exact path='/signin' component={ SignInSignUp } /> */}
+          {/* <Route exact path='/' component={ HomePage } />  */}
           <Route 
             exact 
-            path='/browniepointsv4/signin' 
+            path='/' 
+            render={() => 
+              !this.props.currentUser ? (
+                <Redirect to='/signin' />
+              ) : (
+                <HomePage />
+            )} />
+          <Route 
+            exact 
+            path='/signin/' 
             render={() => 
               this.props.currentUser ? (
-                <Redirect to='/browniepointsv4' />
+                <Redirect to='/' />
               ) : (
                 <SignInSignUp />
             )} />
         </Switch>
+        <Footer />
       </div>
     );
   }

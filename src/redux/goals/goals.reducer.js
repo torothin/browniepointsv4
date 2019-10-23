@@ -1,14 +1,28 @@
 import { GoalsActionTypes } from './goals.types';
 import { newGoal } from './goals.utils';
 
+import { precreatedGoals, precreatedCompletedGoals } from '../../test-scripts/goals-test';
+
 const INITIAL_STATE = {
 
-    goalList: {
-        todos: {},
-        daily: {},
-        weekly: {},
-        monthly: {},
-    }
+    // goalList: {
+    //     todos: [],
+    //     daily: [],
+    //     weekly: [],
+    //     monthly: [],
+    // },
+
+    // completedGoalList: {
+    //     todos: [],
+    //     daily: [],
+    //     weekly: [],
+    //     monthly: [],
+    // }
+
+    // set for testing
+    goalList: precreatedGoals,
+    completedGoalList: precreatedCompletedGoals,
+
 };
 
 const goalsReducer = (state = INITIAL_STATE, action) => {

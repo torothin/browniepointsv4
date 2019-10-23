@@ -2,6 +2,7 @@ import React from 'react';
 import './home-page.styles.scss';
 import UserSection from '../../components/user-section/user-section.component';
 import MenuPopup from '../../components/menu-popup/menu-popup.component';
+import GoalContainer from '../../components/goal-container/goal-container.component';
 import { connect } from 'react-redux';
 
 const HomePage = ({menuPopupShow}) => (
@@ -10,6 +11,7 @@ const HomePage = ({menuPopupShow}) => (
             menuPopupShow &&  <MenuPopup />
         }
         <UserSection />
+        <GoalContainer />
     </div>
 )
 

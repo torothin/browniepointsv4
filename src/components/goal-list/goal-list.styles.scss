@@ -1,0 +1,86 @@
+@import '../assets/color-palate.styles.scss';
+
+
+.goal-section {
+    margin: 10px auto;
+    width: 80%;
+    // height: 30px;
+    display: flex;
+    flex-direction: column;
+}
+
+.goalInfoContainer {
+    position:relative;
+    bottom:45px;
+    left: 25px;
+    height:20px; 
+    width: 20px; 
+    float: right; 
+
+    img {
+        height:100%;
+        float: right;
+        opacity: 0.3
+    }
+}
+
+.add-goal-button {
+    height: 30px;
+    padding: 0;
+    margin: 0;
+    width: 30px;
+    overflow: hidden;
+    
+    & span {
+        font-size: 40px;
+        padding: 0px;
+        margin: 0px;
+        position: relative;
+        top: -8px;
+    }
+}
+
+span {
+    position: relative;
+    top: -3px;
+    font-size: 22px;
+    height: 30px;
+    padding: 0;
+    margin: auto;
+}
+
+.goal-box {
+    background-color: $color-white;
+    width: 100%;
+    margin: 10px auto 0;
+    padding: 0px;
+    box-shadow:inset 2px 5px 10px #555;
+    border-radius:5px;
+
+    & li {
+        padding: 5px;
+    }
+    
+}
+
+.goal-box ul {
+    list-style-type: none;
+    padding-left: 13px;
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+.info-popup {
+    position:relative;
+    bottom:130px;
+    right: 200px;
+    background-color: var(--info);
+    margin: 10px auto;
+    padding: 10px;
+    box-shadow: 2px 5px 10px #555;
+    border-radius:5px;
+    text-align: center;
+    width: 200px;
+    // color: var(--nav_font_main);
+    border:solid black 1px;
+}
