@@ -10,7 +10,7 @@ import NavBar from './components/nav-bar/nav-bar.component';
 import Footer from './components/footer/footer.component';
 
 // routing
-import { Switch, Route, Redirect } from 'react-router-dom';
+import { HashRouter, Switch, Route, Redirect } from 'react-router-dom';
 
 // firebase connection
 import { auth, createUserProfileDocument } from './firebase/firebase.utils';
@@ -19,11 +19,6 @@ import { connect } from 'react-redux';
 import { setCurrentUser } from './redux/user/user.actions';
 
 class App extends React.Component {
-
-  constructor(props) {
-    super(props);
-    this.state = {}
-  }
 
   unsubscribeFromAuth = null
 
@@ -52,33 +47,36 @@ class App extends React.Component {
   }
 
   render() {
-    console.log(this.props.currentUser);
+    console.log("This is the process.env", process.env.PUBLIC_URL)
+    
     return (
-      <div className="App">
-        <NavBar />
-        <Switch>
-          {/* <Route exact path='/' component={ HomePage } />  */}
-          <Route 
-            exact 
-            path='/' 
-            render={() => 
-              !this.props.currentUser ? (
-                <Redirect to='/signin' />
-              ) : (
-                <HomePage />
-            )} />
-          <Route 
-            exact 
-            path='/signin/' 
-            render={() => 
-              this.props.currentUser ? (
-                <Redirect to='/' />
-              ) : (
-                <SignInSignUp />
-            )} />
-        </Switch>
-        <Footer />
-      </div>
+      <HashRouter basename="/">
+        <div className="App">
+          <NavBar />
+          <Switch>
+            <Route 
+              exact 
+              path='/'
+              render={() => 
+                !this.props.currentUser ? (
+                  <Redirect to='/signin/' />
+                ) : (
+                  <HomePage />
+              )} />
+            <Route 
+              exact 
+              path = '/signin/'
+              render={() => 
+                this.props.currentUser ? (
+                  <Redirect to='/' />
+                ) : (
+                  <SignInSignUp />
+              )} />
+              <Route path='/' component={ HomePage } />
+          </Switch>
+          <Footer />
+        </div>
+      </HashRouter>
     );
   }
 }

@@ -10,9 +10,12 @@ import Menu from '../menu/menu.component';
 const NavBar = ({currentUser, toggleMenuHidden, menuHidden}) => {
     return (
         <div className='nav-bar'>
-            {/* <div className='menu-button-container' onClick={ toggleMenuHidden }> */}
-                <CustomButton onClick={ toggleMenuHidden }><img src={ MenuButton } alt='menu-button' /></CustomButton>
-            {/* </div> */}
+            {
+                currentUser &&  
+                    <CustomButton onClick={ toggleMenuHidden }>
+                        <img src={ MenuButton } alt='menu-button' />
+                    </CustomButton>
+            }
             
             {
                 currentUser &&  
@@ -34,7 +37,7 @@ const NavBar = ({currentUser, toggleMenuHidden, menuHidden}) => {
 }
 
 const mapDispatchToProps = dispatch => ({
-    toggleMenuHidden: () => dispatch(toggleMenuHidden())
+    toggleMenuHidden: () => dispatch(toggleMenuHidden()),
 });
 
 const mapStateToProps = state => ({

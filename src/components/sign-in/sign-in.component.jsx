@@ -70,6 +70,7 @@ class SignIn extends React.Component {
                         </CustomButton>
                     </div>
                 </form>
+                <hr />
             </div>
         )
     }

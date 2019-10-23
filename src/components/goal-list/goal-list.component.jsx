@@ -4,15 +4,16 @@ import './goal-list.styles.scss';
 
 const GoalList = ({ goalType, goalList }) => (
     <div className='goal-section'>
-        <CustomButton inverted>
-            { goalType }
-        </CustomButton>
+        
         <div className='goal-box'>
             <ul>
                 {
                     goalList && goalList.map(
                         goal => (
-                            <li key={ goal.ID }> <input type="checkbox" /> { goal.name } &nbsp;&nbsp; ({ goal.points } pts.)</li>
+                            <li key={ goal.ID }> 
+                                <input className='largerCheckbox' type="checkbox" /> 
+                                { goal.name } &nbsp;&nbsp; ({ goal.points } pts.)
+                            </li>
                         )
                     )
                 }

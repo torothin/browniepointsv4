@@ -12,8 +12,7 @@ const WelcomeText = () => (
         <p></p>
         <p>Signup to get started</p>
         
-        
-
+        <hr />
     </div>
 )
 
