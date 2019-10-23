@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/browniepointsv4/precache-manifest.abcbe2f4ec43077930bae0f8f212ac7f.js"
+  "/browniepointsv4/precache-manifest.6094f8eda4066cea5eae739f29be1721.js"
 );
 
 self.addEventListener('message', (event) => {
