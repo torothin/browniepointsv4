@@ -1,6 +1,4 @@
-export const calculateProgressPercentage = ({points, pointsToNextLevel}) => {
-    return Math.ceil( points /  pointsToNextLevel );
-}
+
 
 export const updateLevel = ({ level }) => {
     return level++;
@@ -15,31 +13,48 @@ export const zeroProgressPoints = () => {
         weeklyProgress: 0,
         monthlyProgress: 0,
     }
-},
+}
 
-export const updateProgressPoints = ({ checkedGoals }) => {
-   // console.log("_updateProgressPoints called");
-    const newProgress = zeroProgressPoints();
+export const updateProgressPoints = (progressPoints,goal) => {
+    console.log("updateProgressPoints called")
+    const newProgressPoints = progressPoints;
 
-    checkedGoals.todos.forEach( (goal) => {
-        newProgress.todosProgress += goal.goalPoints;
-        newProgress.total += goal.goalPoints;
-    });
-    checkedGoals.dailyGoals.forEach( (goal) => {
-        newProgress.dailyProgress += goal.goalPoints;
-        newProgress.total += goal.goalPoints;
-    });
-    checkedGoals.weeklyGoals.forEach( (goal) => {
-        newProgress.weeklyProgress += goal.goalPoints;
-        newProgress.total += goal.goalPoints;
-    });
-    checkedGoals.monthlyGoals.forEach( (goal) => {
-        newProgress.monthlyProgress += goal.goalPoints;
-        newProgress.total += goal.goalPoints;
-    });
+    if(goal.checked) {
+        newProgressPoints.total += goal.points;
+    }
+    else {
+        newProgressPoints.total -= goal.points;
+    }
+    return newProgressPoints;
+}
 
-    return newProgress;
-},
+export const calculateProgressPercentage = ({points, pointsToNextLevel}) => {
+    return Math.ceil( points /  pointsToNextLevel );
+}
+
+// export const updateProgressPoints = ({ checkedGoals }) => {
+//    // console.log("_updateProgressPoints called");
+//     const newProgress = zeroProgressPoints();
+
+//     checkedGoals.todos.forEach( (goal) => {
+//         newProgress.todosProgress += goal.goalPoints;
+//         newProgress.total += goal.goalPoints;
+//     });
+//     checkedGoals.dailyGoals.forEach( (goal) => {
+//         newProgress.dailyProgress += goal.goalPoints;
+//         newProgress.total += goal.goalPoints;
+//     });
+//     checkedGoals.weeklyGoals.forEach( (goal) => {
+//         newProgress.weeklyProgress += goal.goalPoints;
+//         newProgress.total += goal.goalPoints;
+//     });
+//     checkedGoals.monthlyGoals.forEach( (goal) => {
+//         newProgress.monthlyProgress += goal.goalPoints;
+//         newProgress.total += goal.goalPoints;
+//     });
+
+//     return newProgress;
+// }
 
 export const calcLevel = ({level,currentPoints,pointsToNextLevel}) => {
     //console.log('\n_calcLevel called')
@@ -53,5 +68,5 @@ export const calcLevel = ({level,currentPoints,pointsToNextLevel}) => {
         currPointsToLevel = pointsToNextLevel;
         tempPoints = currentPoints - currPointsToLevel;
     }
-},
+}
 

@@ -1,5 +1,6 @@
 import { LevelDataActionTypes } from './level-data.types';
-// import {  } from './level-data.utils';
+import { updateProgressPoints, calculateProgressPercent } from './level-data.utils';
+//import { updateProgress } from './level-data.utils';
 
 const INITIAL_STATE = {
     level: 999,
@@ -17,17 +18,22 @@ const INITIAL_STATE = {
         monthlyProgress: 0,
     },
     goalPointTotal: 0, //total points of all the goals to get an average
-    currentLevelPercent: 20, //percentage of level completed
-    progressLevelPercent: 70
+    currentLevelPercent: 0, //percentage of level completed
+    progressLevelPercent: 0,
 }
 
 const levelDataReducer = (state = INITIAL_STATE, action) => {
     switch (action.type) {
-        // case MenuActionTypes.TOGGLE_MENU:
-        //     return {
-        //         ...state,
-        //         menuHidden: !state.menuHidden
-        //     };
+        case LevelDataActionTypes.UPDATE_PROGRESS_POINTS:
+            return {
+                ...state,
+                progress: updateProgressPoints(state.progress,action.payload)
+            };
+        case LevelDataActionTypes.CALC_PROGRESS_PERCENT:
+            return {
+                ...state,
+                progressLevelPercent: Math.ceil( state.progress.total /  state.pointsToNextLevel )
+            }
         default:
             return state;
     }
