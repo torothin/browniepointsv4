@@ -246,22 +246,22 @@ const todo_3 = {
 }
 
 const precreatedGoals = {
-    todos: [],
+    todo: [],
     daily: [],
     weekly: [],
     monthly: [],
 };
 
 const precreatedCompletedGoals = {
-    todos: [],
+    todo: [],
     daily: [],
     weekly: [],
     monthly: [],
 };
 
-precreatedGoals.todos.push(todo_1);
-precreatedGoals.todos.push(todo_2);
-precreatedGoals.todos.push(todo_3);
+precreatedGoals.todo.push(todo_1);
+precreatedGoals.todo.push(todo_2);
+precreatedGoals.todo.push(todo_3);
 
 precreatedGoals.daily.push(dailyGoal_1);
 precreatedGoals.daily.push(dailyGoal_2);
@@ -275,7 +275,7 @@ precreatedGoals.monthly.push(monthlyGoal_1);
 precreatedGoals.monthly.push(monthlyGoal_2);
 precreatedGoals.monthly.push(monthlyGoal_3);
 
-precreatedCompletedGoals.todos.push(todo_2);
+precreatedCompletedGoals.todo.push(todo_2);
 precreatedCompletedGoals.daily.push(dailyGoal_2);
 precreatedCompletedGoals.weekly.push(weeklyGoal_2);
 precreatedCompletedGoals.monthly.push(monthlyGoal_2);

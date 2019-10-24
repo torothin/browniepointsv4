@@ -65,7 +65,7 @@ class SignIn extends React.Component {
                         required />
                     <div className='buttons'>
                         <CustomButton type='submit' value='Submit Form' inverted>Sign In</CustomButton>
-                        <CustomButton onClick={ signInWithGoogle } inverted isGoogleSignIn>
+                        <CustomButton onClick={ signInWithGoogle } inverted>
                             Sign In with Google
                         </CustomButton>
                     </div>

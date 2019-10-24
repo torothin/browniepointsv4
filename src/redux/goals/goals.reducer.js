@@ -1,5 +1,5 @@
 import { GoalsActionTypes } from './goals.types';
-import { newGoal } from './goals.utils';
+import { newGoal, checkGoal } from './goals.utils';
 
 import { precreatedGoals, precreatedCompletedGoals } from '../../test-scripts/goals-test';
 
@@ -33,16 +33,22 @@ const goalsReducer = (state = INITIAL_STATE, action) => {
                 
             };
         case GoalsActionTypes.REMOVE_GOAL:
-                return {
-                    ...state,
-                    
-                };
+            return {
+                ...state,
+                
+            };
         case GoalsActionTypes.NEW_GOAL:
-                return {
-                    ...state,
-                    goalList: newGoal(state.goalList, action.payload),
-                    
-                };
+            return {
+                ...state,
+                goalList: newGoal(state.goalList, action.payload),
+                
+            };
+        case GoalsActionTypes.CHECK_GOAL:
+            return {
+                ...state,
+                goalList: checkGoal(state.goalList, action.payload),
+                
+            };
         default:
             return state;
     }

@@ -1,25 +1,81 @@
-export const newGoal = (currentGoals, {name, type, ID, points}) => {
-    
-    const goal = {
-        name: name,
-        type: type,
-        ID: ID,
-        startDate: new Date(),
-        lastCompleted: null,
-        nextCompletion: null,
-        points: points,
-        checked: false,
-    }
+import { newCheckedDate  } from '../../helpers/basic-date.helper';
 
-    currentGoals[type].push(goal);
-
-    return currentGoals;
+export const newGoal = (currentGoals) => {
+    console.log("newGoal", currentGoals);
 }
 
-export const indexOfIncluded = ({goalArray, inputGoal}) => {
+// export const newGoal = (currentGoals, {name, type, ID, points}) => {
+    
+//     const goal = {
+//         name: name,
+//         type: type,
+//         ID: ID,
+//         startDate: new Date(),
+//         lastCompleted: null,
+//         nextCompletion: null,
+//         points: points,
+//         checked: false,
+//     }
+
+//     currentGoals[type].push(goal);
+
+//     return currentGoals;
+// }
+
+export const checkGoal = (currentGoals,goal) => {
+    console.log("checkGoal called");
+    // console.log(goal);
+    //console.log(currentGoals);
+
+    const tempGoal = goal;
+    const tempGoals = currentGoals;
+
+    // console.log(tempGoal);
+    // console.log(tempGoals);
+
+    //needs to be fixed
+    if(tempGoal.checked) { // first if the goal is checked uncheck
+        tempGoal.checked = false;
+        tempGoal.nextCompletion = null;
+
+        //return tempGoal;
+    }
+    else if(!tempGoal.checked){
+        tempGoal.checked = true;
+        tempGoal.nextCompletion = newCheckedDate(goal.type);
+    }
+    else {
+        return currentGoals;
+    }
+
+    // array of specific goal type
+    const tempGoalsArray = tempGoals[tempGoal.type];
+
+    // index of goal in the array
+    const goalIndex = indexOfIncluded(tempGoalsArray, tempGoal);
+    console.log("goalIndex:",goalIndex);
+
+    if(goalIndex >= 0)
+    {
+        // goal in the array updated to tempGoal
+        tempGoalsArray[goalIndex] = tempGoal;
+
+        //tempGoalsArray overwrites tempGoals for this goal type
+        tempGoals[tempGoal.type] = tempGoalsArray;
+    }
+    
+    console.log(tempGoals);
+
+    return tempGoals;
+
+
+}
+
+export const indexOfIncluded = (goalArray, inputGoal) => {
+    console.log("indexOfIncluded",goalArray, inputGoal);
     for(let i = 0; i < goalArray.length; i++)
     {
-        if(goalArray[i].goalID === inputGoal.goalID)
+        if(goalArray[i].ID === inputGoal.ID)
         {
             return i;
         }

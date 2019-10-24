@@ -30,7 +30,7 @@ const GoalContainer = ({
             <CustomButton onClick={ toggleTodoList } inverted> ToDos </CustomButton>
             { 
                 todoListShow && 
-                    <GoalList goalType='ToDos' goalList={ goalList.todos } /> 
+                    <GoalList goalType='ToDos' goalList={ goalList.todo } /> 
             }
             
             <CustomButton onClick={ toggleDailyList } inverted> Daily Goals </CustomButton>
@@ -50,6 +50,12 @@ const GoalContainer = ({
                 monthlyListShow && 
                     <GoalList goalType='Monthly Goals' goalList={ goalList.monthly } /> 
             }
+{/* 
+            <GoalList goalType='ToDos' goalList={ goalList.todos } /> 
+            <GoalList goalType='Daily Goals' goalList={ goalList.daily } /> 
+            <GoalList goalType='Weekly Goals' goalList={ goalList.weekly } /> 
+            <GoalList goalType='Monthly Goals' goalList={ goalList.monthly } />  */}
+            
             
         </div>
     )

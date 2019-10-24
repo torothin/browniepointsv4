@@ -1,4 +1,4 @@
-export const convertToBasicDate = ( date ) => {
+const convertToBasicDate = ( date ) => {
     
     const basicDate = {
         day: date.getDate(),
@@ -8,13 +8,13 @@ export const convertToBasicDate = ( date ) => {
     }
 
     return basicDate;
-},
+};
 
-export const newBasicDate = () => {
+const newBasicDate = () => {
     return convertToBasicDate( new Date() );
-},
+};
 
-export const leftGreaterRight = (leftDate,rightDate) => {
+const leftGreaterRight = (leftDate,rightDate) => {
 
     //years are the same and month is the same
     if(leftDate.year === rightDate.year && 
@@ -55,9 +55,9 @@ export const leftGreaterRight = (leftDate,rightDate) => {
         return false;
     }
     
-},
+};
 
-export const leftGreaterOrEqualRight = (leftDate,rightDate) => {
+const leftGreaterOrEqualRight = (leftDate,rightDate) => {
 
     //years are the same and month is the same
     if(leftDate.year === rightDate.year && 
@@ -97,8 +97,34 @@ export const leftGreaterOrEqualRight = (leftDate,rightDate) => {
     {
         return false;
         }
-},
+};
 
-export const printMyDate = (input) => {
+const printMyDate = (input) => {
     return input.month + "/" + input.day + "/" + input.year;
-},
+};
+
+const newCheckedDate = (goalType) => {  
+    const newDate = new Date();
+
+    if(goalType === "todo" || goalType=== "daily") {
+        newDate.setDate(newDate.getDate() + 1);
+    }
+    else if(goalType === 'weekly') {
+        let daysToComplete = 7 - newDate.getDay();
+        newDate.setDate(newDate.getDate() + daysToComplete);
+    }
+    else if(goalType === 'monthly') {
+        newDate.setMonth(newDate.getMonth() + 1);
+        newDate.setDate(1);
+    }
+    else {
+        return
+    }
+
+    const returnDate = convertToBasicDate(newDate);
+    console.log(returnDate);
+    return returnDate;
+
+};
+
+export { convertToBasicDate, newBasicDate, leftGreaterRight, leftGreaterOrEqualRight, printMyDate, newCheckedDate}

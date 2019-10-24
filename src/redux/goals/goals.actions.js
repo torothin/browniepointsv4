@@ -14,3 +14,8 @@ export const newGoal = goal => ({
     type: GoalsActionTypes.NEW_GOAL,
     payload: goal
 });
+
+export const checkGoal = (goal) => ({
+    type: GoalsActionTypes.CHECK_GOAL,
+    payload: goal
+});
