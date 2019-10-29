@@ -4,14 +4,13 @@ import { updateProgressPoints, calculateProgressPercent } from './level-data.uti
 
 const INITIAL_STATE = {
     level: 999,
-    nextGoalID: 1,
     lastUpdate: null,
     lastRewardLevel: 1,
     pointsToNextLevel: 1, //number of points to get from last level to next level
-    currentPoints: 10, //current number of points for the level . . .currPoints > pointsToNextLevel means gain a level
-    progressPoints: 90,
+    currentPoints: 0, //current number of points for the level . . .currPoints > pointsToNextLevel means gain a level
+    progressPoints: 27,
     progress: {
-        total: 0,
+        total: 27,
         todosProgress: 0,
         dailyProgress: 0,
         weeklyProgress: 0,
@@ -19,7 +18,7 @@ const INITIAL_STATE = {
     },
     goalPointTotal: 0, //total points of all the goals to get an average
     currentLevelPercent: 0, //percentage of level completed
-    progressLevelPercent: 0,
+    progressLevelPercent: 27,
 }
 
 const levelDataReducer = (state = INITIAL_STATE, action) => {

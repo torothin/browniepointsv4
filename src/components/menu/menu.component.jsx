@@ -2,31 +2,35 @@ import React from 'react';
 import './menu.styles.scss';
 import CustomButton from '../custom-button/custom-button.component';
 import { connect } from 'react-redux';
-import { toggleMenuPopupShow , toggleMenuHidden } from '../../redux/menu/menu.actions';
+import { toggleMenuPopupShow , toggleMenuHidden, menuSelection } from '../../redux/menu/menu.actions';
 
-const Menu = ({ toggleMenuPopupShow, toggleMenuHidden }) => (
+const Menu = ({ toggleMenuPopupShow, toggleMenuHidden, menuSelection }) => (
     <div className='menu-back'>
         <div className='menu'>
             <CustomButton
                 onClick = { () => {
+                    menuSelection("Add Goal");
                     toggleMenuPopupShow();
                     toggleMenuHidden();
-                } }>Option 1</CustomButton>
+                } }>Add Goal</CustomButton>
             <CustomButton
                 onClick = { () => {
+                    menuSelection("Remove Goal");
                     toggleMenuPopupShow();
                     toggleMenuHidden();
-                } }>Option 2</CustomButton>
+                } }>Remove Goal</CustomButton>
             <CustomButton
                 onClick = { () => {
+                    menuSelection("Add Reward");
                     toggleMenuPopupShow();
                     toggleMenuHidden();
-                } }>Option 3</CustomButton>
+                } }>Add Reward</CustomButton>
             <CustomButton 
                 onClick = { () => {
+                    menuSelection("Remove Reward");
                     toggleMenuPopupShow();
                     toggleMenuHidden();
-                } }>Option 4</CustomButton>
+                } }>Remove Reward</CustomButton>
             <CustomButton
                 onClick = { () => {
                     toggleMenuPopupShow();
@@ -40,6 +44,7 @@ const Menu = ({ toggleMenuPopupShow, toggleMenuHidden }) => (
 const mapDispatchToProps = dispatch => ({
     toggleMenuPopupShow: () => dispatch(toggleMenuPopupShow()),
     toggleMenuHidden: () => dispatch(toggleMenuHidden()),
+    menuSelection: (selection) => dispatch(menuSelection(selection)),
 });
 
 

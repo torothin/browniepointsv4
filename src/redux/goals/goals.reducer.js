@@ -5,6 +5,8 @@ import { precreatedGoals, precreatedCompletedGoals } from '../../test-scripts/go
 
 const INITIAL_STATE = {
 
+    nextGoalID: 13,
+
     // goalList: {
     //     todos: [],
     //     daily: [],
@@ -40,8 +42,8 @@ const goalsReducer = (state = INITIAL_STATE, action) => {
         case GoalsActionTypes.NEW_GOAL:
             return {
                 ...state,
-                goalList: newGoal(state.goalList, action.payload),
-                
+                goalList: newGoal(state.goalList, state.nextGoalID, action.payload),
+                nextGoalID: state.nextGoalID + 1,
             };
         case GoalsActionTypes.CHECK_GOAL:
             return {

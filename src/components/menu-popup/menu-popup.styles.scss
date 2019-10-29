@@ -1,7 +1,7 @@
 @import '../assets/color-palate.styles.scss';
 
 
-.menu-popup-container {
+.menu-popup-background {
     background-color: #0000008f;
     position: fixed;
     top:0;
@@ -23,8 +23,8 @@
 }
 
 .popup-contents {
-    height: 100px;
-    width: 200px;
+    height: 150px;
+    width: 250px;
     margin: 10px auto;
     border: solid 2px blue;
 }

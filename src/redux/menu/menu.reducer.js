@@ -1,4 +1,5 @@
 import { MenuActionTypes } from './menu.types';
+import { menuSelectionHelper } from './menu.utils';
 
 const INITIAL_STATE = {
     menuHidden: true,
@@ -7,6 +8,15 @@ const INITIAL_STATE = {
     dailyListShow: true,
     weeklyListShow: true,
     monthlyListShow: true,
+    menuSelection: {
+        addGoal: false,
+        removeGoal: false,
+        addReward: false,
+        removeReward: false
+
+    },
+    menuPopupResult: "",
+    menuAccepted: false,
 };
 
 const menuReducer = (state = INITIAL_STATE, action) => {
@@ -19,7 +29,8 @@ const menuReducer = (state = INITIAL_STATE, action) => {
         case MenuActionTypes.TOGGLE_MENU_POPUP:
             return {
                 ...state,
-                menuPopupShow: !state.menuPopupShow
+                menuPopupShow: !state.menuPopupShow,
+                menuPopupResult: action.payload,
             };
         case MenuActionTypes.TOGGLE_TODO_LIST:
             return {
@@ -41,6 +52,17 @@ const menuReducer = (state = INITIAL_STATE, action) => {
                 ...state,
                 monthlyListShow: !state.monthlyListShow
             };
+        case MenuActionTypes.MENU_SELECTION:
+            return {
+                ...state,
+                menuSelection: menuSelectionHelper(action.payload, state.menuSelection),
+                
+            };
+        case MenuActionTypes.MENU_ACCEPT:
+            return {
+                ...state,
+                menuAccepted: action.payload,
+            }
         default:
             return state;
     }

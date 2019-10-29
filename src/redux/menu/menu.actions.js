@@ -10,6 +10,11 @@ export const toggleMenuPopupShow = show => ({
     payload: show
 });
 
+export const menuSelection = selection => ({
+    type: MenuActionTypes.MENU_SELECTION,
+    payload: selection
+});
+
 export const toggleTodoList = toggle =>  ({
     type: MenuActionTypes.TOGGLE_TODO_LIST,
     payload: toggle
@@ -28,4 +33,9 @@ export const toggleWeeklyList = toggle =>  ({
 export const toggleMonthlyList = toggle =>  ({
     type: MenuActionTypes.TOGGLE_MONTHLY_LIST,
     payload: toggle
+});
+
+export const menuAccept = accepted =>  ({
+    type: MenuActionTypes.MENU_ACCEPT,
+    payload: accepted
 });

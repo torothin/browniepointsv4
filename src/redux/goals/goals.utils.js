@@ -1,29 +1,31 @@
 import { newCheckedDate  } from '../../helpers/basic-date.helper';
 
-export const newGoal = (currentGoals) => {
-    console.log("newGoal", currentGoals);
+export const newGoal = (currentGoals, goalID, newGoal) => {
+    
+    //alert("newGoal called");
+    //console.log(currentGoals);
+    //console.log(newGoal);
+    //alert(newGoal.name, newGoal.type ,newGoal.ID,newGoal.points);
+    const {name, type, points} = newGoal;
+    
+    const goal = {
+        name: name,
+        type: type,
+        ID: goalID,
+        startDate: new Date(),
+        lastCompleted: null,
+        nextCompletion: null,
+        points: points,
+        checked: false,
+    }
+
+    currentGoals[type].push(goal);
+
+    return currentGoals;
 }
 
-// export const newGoal = (currentGoals, {name, type, ID, points}) => {
-    
-//     const goal = {
-//         name: name,
-//         type: type,
-//         ID: ID,
-//         startDate: new Date(),
-//         lastCompleted: null,
-//         nextCompletion: null,
-//         points: points,
-//         checked: false,
-//     }
-
-//     currentGoals[type].push(goal);
-
-//     return currentGoals;
-// }
-
 export const checkGoal = (currentGoals,goal) => {
-    console.log("checkGoal called");
+    //console.log("checkGoal called");
     // console.log(goal);
     //console.log(currentGoals);
 
@@ -53,8 +55,7 @@ export const checkGoal = (currentGoals,goal) => {
 
     // index of goal in the array
     const goalIndex = indexOfIncluded(tempGoalsArray, tempGoal);
-    console.log("goalIndex:",goalIndex);
-
+    
     if(goalIndex >= 0)
     {
         // goal in the array updated to tempGoal
@@ -63,8 +64,6 @@ export const checkGoal = (currentGoals,goal) => {
         //tempGoalsArray overwrites tempGoals for this goal type
         tempGoals[tempGoal.type] = tempGoalsArray;
     }
-    
-    console.log(tempGoals);
 
     return tempGoals;
 

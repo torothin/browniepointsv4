@@ -204,7 +204,7 @@ const todo_1 = {
 }
 
 const todo_2 = {
-    name: 'todo_2',
+    name: 'todo_2_todo_todo_todo_todo_todo_todo_todo_todo_todo_todo_todo_',
     type: "todo",
     ID: 11,
     startDate: new Date(),
