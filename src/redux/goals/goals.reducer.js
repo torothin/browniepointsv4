@@ -1,12 +1,14 @@
 import { GoalsActionTypes } from './goals.types';
-import { newGoal, checkGoal } from './goals.utils';
+import { addGoal, checkGoal, completeGoalsTest, completeGoals, resetEarnedPoints } from './goals.utils';
 
 import { precreatedGoals, precreatedCompletedGoals } from '../../test-scripts/goals-test';
 
 const INITIAL_STATE = {
 
     nextGoalID: 13,
-
+    goalPointTotal: 0, //total points of all the goals to get an average
+    lastUpdate: null,
+    
     // goalList: {
     //     todos: [],
     //     daily: [],
@@ -24,33 +26,36 @@ const INITIAL_STATE = {
     // set for testing
     goalList: precreatedGoals,
     completedGoalList: precreatedCompletedGoals,
+    goalEarnedPoints: 0,
 
 };
 
 const goalsReducer = (state = INITIAL_STATE, action) => {
     switch (action.type) {
-        case GoalsActionTypes.ADD_GOAL:
-            return {
-                ...state,
-                
-            };
         case GoalsActionTypes.REMOVE_GOAL:
             return {
                 ...state,
-                
             };
-        case GoalsActionTypes.NEW_GOAL:
+        case GoalsActionTypes.ADD_GOAL:
             return {
                 ...state,
-                goalList: newGoal(state.goalList, state.nextGoalID, action.payload),
+                goalList: addGoal(state.goalList, state.nextGoalID, action.payload),
                 nextGoalID: state.nextGoalID + 1,
             };
         case GoalsActionTypes.CHECK_GOAL:
             return {
                 ...state,
                 goalList: checkGoal(state.goalList, action.payload),
-                
             };
+        case GoalsActionTypes.RESET_EARNED_POINTS:
+            return {
+                ...state,
+                goalEarnedPoints: resetEarnedPoints(),
+            };
+        case GoalsActionTypes.COMPLETE_GOALS_TEST:
+            return completeGoalsTest(state);
+        case GoalsActionTypes.COMPLETE_GOALS:
+            return completeGoals(state);
         default:
             return state;
     }

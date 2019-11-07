@@ -8,30 +8,35 @@ const Menu = ({ toggleMenuPopupShow, toggleMenuHidden, menuSelection }) => (
     <div className='menu-back'>
         <div className='menu'>
             <CustomButton
+                inverted
                 onClick = { () => {
                     menuSelection("Add Goal");
                     toggleMenuPopupShow();
                     toggleMenuHidden();
                 } }>Add Goal</CustomButton>
             <CustomButton
+                inverted
                 onClick = { () => {
                     menuSelection("Remove Goal");
                     toggleMenuPopupShow();
                     toggleMenuHidden();
                 } }>Remove Goal</CustomButton>
             <CustomButton
+                inverted
                 onClick = { () => {
                     menuSelection("Add Reward");
                     toggleMenuPopupShow();
                     toggleMenuHidden();
                 } }>Add Reward</CustomButton>
             <CustomButton 
+                inverted
                 onClick = { () => {
                     menuSelection("Remove Reward");
                     toggleMenuPopupShow();
                     toggleMenuHidden();
                 } }>Remove Reward</CustomButton>
             <CustomButton
+                inverted
                 onClick = { () => {
                     toggleMenuPopupShow();
                     toggleMenuHidden();

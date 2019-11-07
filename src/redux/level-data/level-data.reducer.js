@@ -1,38 +1,55 @@
 import { LevelDataActionTypes } from './level-data.types';
-import { updateProgressPoints, calculateProgressPercent } from './level-data.utils';
+import { updateProgressPoints, calculatePercentage, updateLevel, updateEarnedPoints } from './level-data.utils';
 //import { updateProgress } from './level-data.utils';
 
 const INITIAL_STATE = {
-    level: 999,
-    lastUpdate: null,
+    level: 1,
     lastRewardLevel: 1,
     pointsToNextLevel: 1, //number of points to get from last level to next level
-    currentPoints: 0, //current number of points for the level . . .currPoints > pointsToNextLevel means gain a level
+    earnedPoints: 0, //earned number of points for the level . . .earnedPoints > pointsToNextLevel means gain a level
+    earnedLevelPercent: 0, //percentage of level completed
     progressPoints: 27,
-    progress: {
-        total: 27,
-        todosProgress: 0,
-        dailyProgress: 0,
-        weeklyProgress: 0,
-        monthlyProgress: 0,
-    },
-    goalPointTotal: 0, //total points of all the goals to get an average
-    currentLevelPercent: 0, //percentage of level completed
     progressLevelPercent: 27,
 }
+
+// progress: {
+//     total: 27,
+//     todosProgress: 0,
+//     dailyProgress: 0,
+//     weeklyProgress: 0,
+//     monthlyProgress: 0,
+// },
 
 const levelDataReducer = (state = INITIAL_STATE, action) => {
     switch (action.type) {
         case LevelDataActionTypes.UPDATE_PROGRESS_POINTS:
             return {
                 ...state,
-                progress: updateProgressPoints(state.progress,action.payload)
+                progressPoints: updateProgressPoints(state.progressPoints,action.payload)
             };
-        case LevelDataActionTypes.CALC_PROGRESS_PERCENT:
+        case LevelDataActionTypes.UPDATE_PROGRESS_PERCENT:
             return {
                 ...state,
-                progressLevelPercent: Math.ceil( state.progress.total /  state.pointsToNextLevel )
-            }
+                progressLevelPercent: calculatePercentage(state.progressPoints,state.pointsToNextLevel) 
+            };
+        case LevelDataActionTypes.UPDATE_EARNED_POINTS:
+            return {
+                ...state,
+                earnedPoints: updateEarnedPoints(state.earnedPoints,action.payload)
+            };
+        case LevelDataActionTypes.UPDATE_EARNED_PERCENT:
+            return {
+                ...state,
+                earnedLevelPercent: calculatePercentage(state.earnedPoints,state.pointsToNextLevel) 
+            };
+        // case LevelDataActionTypes.UPDATE_LEVEL:
+        //     return {
+        //         ...state,
+        //         level: updateLevel(state.earnedPoints,state.pointsToNextLevel) 
+        //     };
+        case LevelDataActionTypes.UPDATE_LEVEL:
+            return updateLevel(state);
+
         default:
             return state;
     }

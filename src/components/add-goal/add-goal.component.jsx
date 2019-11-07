@@ -3,7 +3,7 @@ import './add-goal.styles.scss';
 import { toggleMenuPopupShow } from '../../redux/menu/menu.actions';
 import CustomButton from '../custom-button/custom-button.component';
 import { connect } from 'react-redux';
-import { newGoal } from '../../redux/goals/goals.actions';
+import { addGoal } from '../../redux/goals/goals.actions';
 
 
 class AddGoal extends React.Component {
@@ -23,13 +23,10 @@ class AddGoal extends React.Component {
         }
     }
 
-    handleSubmit = async event => {
+    handleSubmit = event => {
         event.preventDefault();
         const {name, type, ID, points} = this.state;
-        //console.log("this.state", {newGoalName, newGoalType, newGoalID, newGoalPoints});
-        this.props.newGoal({name, type, ID, points});
-        //alert("After newGoal called");
-        //this.setState({newGoalName: "", newGoalType: "", newGoalID: null, newGoalPoints:0});
+        this.props.addGoal({name, type, ID, points});
         this.props.toggleMenuPopupShow("accept");
         
     }
@@ -66,20 +63,16 @@ class AddGoal extends React.Component {
                         /> 
                     <select 
                         required
+                        onChange={this.handleChange}
+                        name='type'
                         >
-                        {/* name='type'
-                        value={this.state.type}
-                        onChange={this.handleChange} */}
-                        <option value="" 
-                                >Select Goal Frequency:</option>
-                        <option>Todo</option>
-                        <option>Daily</option>
-                        <option>Weekly</option>
-                        <option>Monthly</option>
+                        <option value="">Select Goal Frequency:</option>
+                        <option value='todo'>Todo</option>
+                        <option value='daily'>Daily</option>
+                        <option value='weekly'>Weekly</option>
+                        <option value='monthly'>Monthly</option>
                     </select>
-                    <CustomButton 
-                        type='submit'
-                        inverted>
+                    <CustomButton type='submit'>
                         Accept
                     </CustomButton>
                 </form>
@@ -91,8 +84,8 @@ class AddGoal extends React.Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-    newGoal: (goalData) => 
-        dispatch(newGoal(goalData)),
+    addGoal: (goalData) => 
+        dispatch(addGoal(goalData)),
     toggleMenuPopupShow: (result) => dispatch(toggleMenuPopupShow(result)),
    
 });

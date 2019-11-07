@@ -2,7 +2,6 @@ import React from 'react';
 import GoalList from '../goal-list/goal-list.component';
 import './goal-container.styles.scss';
 import CustomButton from '../custom-button/custom-button.component';
-import { connect } from 'react-redux';
 
 class GoalContainer extends React.Component {
     constructor(props) {
@@ -12,38 +11,36 @@ class GoalContainer extends React.Component {
             dailyListShow: true,
             weeklyListShow: true,
             monthlyListShow: true,
-            goalList: props.goalList,
         };
     }
 
+    componentDidUpdate() {
+        //console.log('goal-container update',this.state.goalList)
+    }
+
     render() {
-        const {goalList, todoListShow, dailyListShow,
-            weeklyListShow, monthlyListShow } = this.state;
+        const {todoListShow, dailyListShow, weeklyListShow, monthlyListShow } = this.state;
 
         return(
             <div className='goal-container'>
-                <CustomButton onClick={ this.toggleTodoList } inverted> ToDos </CustomButton>
+                <CustomButton onClick={ this.toggleTodoList }> ToDos </CustomButton>
                 { 
-                    todoListShow && 
-                        <GoalList goalTypeString='ToDos' goalType='todo' /> 
+                    todoListShow && <GoalList goalType='todo' /> 
                 }
                 
-                <CustomButton onClick={ this.toggleDailyList } inverted> Daily Goals </CustomButton>
+                <CustomButton onClick={ this.toggleDailyList }> Daily Goals </CustomButton>
                 { 
-                    dailyListShow && 
-                        <GoalList goalTypeString='Daily Goals' goalType='daily' /> 
+                    dailyListShow && <GoalList goalType='daily' /> 
                 }
                 
-                <CustomButton onClick={ this.toggleWeeklyList } inverted> Weekly Goals </CustomButton>
+                <CustomButton onClick={ this.toggleWeeklyList }> Weekly Goals </CustomButton>
                 { 
-                    weeklyListShow &&  
-                        <GoalList goalTypeString='Weekly Goals' goalType='weekly' /> 
+                    weeklyListShow && <GoalList goalType='weekly' /> 
                 }
 
-                <CustomButton onClick={ this.toggleMonthlyList } inverted> Monthly Goals </CustomButton>
+                <CustomButton onClick={ this.toggleMonthlyList }> Monthly Goals </CustomButton>
                 { 
-                    monthlyListShow && 
-                        <GoalList goalTypeString='Monthly Goals' goalType='monthly' /> 
+                    monthlyListShow && <GoalList goalType='monthly' /> 
                 }
 
             </div>
@@ -56,11 +53,5 @@ class GoalContainer extends React.Component {
     toggleMonthlyList = () => (this.setState({monthlyListShow: !this.state.monthlyListShow}));
 }
 
-const mapDispatchToProps = dispatch => ({
-});
 
-const mapStateToProps = state => ({
-    goalList: state.goals.goalList,
-})
-
-export default connect(mapStateToProps,mapDispatchToProps)(GoalContainer);
+export default GoalContainer;

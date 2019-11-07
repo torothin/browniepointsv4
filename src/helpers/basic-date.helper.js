@@ -127,4 +127,4 @@ const newCheckedDate = (goalType) => {
 
 };
 
-export { convertToBasicDate, newBasicDate, leftGreaterRight, leftGreaterOrEqualRight, printMyDate, newCheckedDate}
+export { convertToBasicDate, newBasicDate, leftGreaterRight, leftGreaterOrEqualRight, printMyDate, newCheckedDate }

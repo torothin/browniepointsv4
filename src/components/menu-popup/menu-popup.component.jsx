@@ -44,7 +44,7 @@ const MenuPopup = ({ toggleMenuPopupShow,menuSelection }) => (
                 
             </div>
             <div className='button-container'>
-                <CustomButton id='popupButton' onClick = { ()=> { toggleMenuPopupShow("cancel") }} inverted>Cancel</CustomButton>
+                <CustomButton id='popupButton' onClick = { ()=> { toggleMenuPopupShow("cancel") }}>Cancel</CustomButton>
             </div>
         </div>
         

@@ -1,11 +1,11 @@
-import { newCheckedDate  } from '../../helpers/basic-date.helper';
+import { convertToBasicDate, newBasicDate, leftGreaterRight, 
+    leftGreaterOrEqualRight, printMyDate, newCheckedDate } from '../../helpers/basic-date.helper';
+import {levelDataReducer} from '../level-data/level-data.reducer';
+import { database } from 'firebase';
 
-export const newGoal = (currentGoals, goalID, newGoal) => {
+export const addGoal = (currentGoals, goalID, newGoal) => {
     
-    //alert("newGoal called");
-    //console.log(currentGoals);
-    //console.log(newGoal);
-    //alert(newGoal.name, newGoal.type ,newGoal.ID,newGoal.points);
+    const newGoalList = {...currentGoals};
     const {name, type, points} = newGoal;
     
     const goal = {
@@ -19,21 +19,15 @@ export const newGoal = (currentGoals, goalID, newGoal) => {
         checked: false,
     }
 
-    currentGoals[type].push(goal);
+    newGoalList[type].push(goal);
 
-    return currentGoals;
+    return newGoalList;
 }
 
 export const checkGoal = (currentGoals,goal) => {
-    //console.log("checkGoal called");
-    // console.log(goal);
-    //console.log(currentGoals);
-
+    
     const tempGoal = goal;
-    const tempGoals = currentGoals;
-
-    // console.log(tempGoal);
-    // console.log(tempGoals);
+    const tempGoals = {...currentGoals};
 
     //needs to be fixed
     if(tempGoal.checked) { // first if the goal is checked uncheck
@@ -52,7 +46,7 @@ export const checkGoal = (currentGoals,goal) => {
 
     // array of specific goal type
     const tempGoalsArray = tempGoals[tempGoal.type];
-
+    console.log("just before error",tempGoals[tempGoal.type],tempGoal.type,tempGoal)
     // index of goal in the array
     const goalIndex = indexOfIncluded(tempGoalsArray, tempGoal);
     
@@ -66,8 +60,6 @@ export const checkGoal = (currentGoals,goal) => {
     }
 
     return tempGoals;
-
-
 }
 
 export const indexOfIncluded = (goalArray, inputGoal) => {
@@ -82,15 +74,20 @@ export const indexOfIncluded = (goalArray, inputGoal) => {
     return -1;
 }
 
-// _completeGoalsTest () {
-//     this.userData.lastUpdate.year = 2018;
-//     // console.log('modified lastupdate');
-//     // console.log(this._printMyDate(this.userData.lastUpdate));
-//     //this._completeGoals();
-// },
+export const completeGoalsTest = state => {
+    state.lastUpdate = newBasicDate();
+    state.lastUpdate.year = 2018;
+    return completeGoals(state);
+}
 
-// _completeGoals () {
-//     let todaysDate = this._myDateObject(new Date);
+export const resetEarnedPoints = () => {
+    return 0;
+}
+
+export const completeGoals = state => {
+    const todaysDate = newBasicDate();
+    let goalEarnedPoints = state.goalEarnedPoints;
+    const newState = {...state};
 
 //     // -------------   Testing Setup   -------------
 //     // console.log('----------------------------------');
@@ -109,9 +106,9 @@ export const indexOfIncluded = (goalArray, inputGoal) => {
 //     // console.log('this._compareDates(todaysDate,this.userData.lastUpdate)');
 //     // console.log(this._compareDates(todaysDate,this.userData.lastUpdate));
 
-//     if(this.userData.lastUpdate == null || this._leftGreaterRight(todaysDate,this.userData.lastUpdate))
-//     {
-//         //console.log('updating complete goals');
+    if(!newState.lastUpdate || leftGreaterRight(todaysDate,newState.lastUpdate))
+    {
+        //console.log('updating complete goals');
 
 //         // todos
 //         let todosCheckedGoalsLength = this.userData.checkedGoals.todos.length;
@@ -151,33 +148,36 @@ export const indexOfIncluded = (goalArray, inputGoal) => {
             
 //             }
 
-//         // completing daily goals
-//         let dailyCheckedGoalsLength = this.userData.checkedGoals.dailyGoals.length;
-//         let i = this.userData.checkedGoals.dailyGoals.length;
+        // completing daily goals
+        let dailyCheckedGoalsLength = newState.goalList.daily.length;
+        let i = dailyCheckedGoalsLength;
 
-//         while(i > 0)
-//         {
-//             let tempDailyGoal = this.userData.checkedGoals.dailyGoals.pop();
+        while(i > 0)
+        {
+            let tempDailyGoal = newState.goalList.daily.pop();
+            //console.log(tempDailyGoal);
             
-//             //if the goal is not really complete i.e proper amount of time has not passed
-//             //this is true if today > checkedDate (1 day has passed)
+            //if the goal is not really complete i.e proper amount of time has not passed
+            //this is true if today > checkedDate (1 day has passed)
          
-//             if( tempDailyGoal.completeDate != null && 
-//                 this._leftGreaterOrEqualRight(todaysDate,tempDailyGoal.completeDate))
-               
-//             {
-//                 //console.log("completed goal: " + tempDailyGoal.goalName);
-//                 this.userData.progress.dailyProgress -= tempDailyGoal.goalPoints;
-//                 this.userData.currentPoints += tempDailyGoal.goalPoints;
+            if( tempDailyGoal.nextCompletion && 
+                leftGreaterOrEqualRight(todaysDate,tempDailyGoal.nextCompletion) &&
+                tempDailyGoal.checked) {
+
+                    tempDailyGoal.checked = false;
+                    tempDailyGoal.nextCompletion = null;
+                    tempDailyGoal.lastCompleted = todaysDate;
+
+                //how to update earned points in the level-data reducer
+                goalEarnedPoints += tempDailyGoal.points;
                 
-//                 }
-//             else
-//             {
-//                 this.userData.checkedGoals.dailyGoals.unshift(tempDailyGoal);
-//                 tempDailyGoal = null;
-//                 }
-//             i--;
-//             }
+            }
+
+            newState.goalList.daily.unshift(tempDailyGoal);
+            //checkGoal(newState.goalList,newState.goalList.daily);
+            tempDailyGoal = null;  
+            i--;
+        }
         
 //         // Checking Weekly Goals
 //         let weeklyCheckedGoalsLength = this.userData.checkedGoals.weeklyGoals.length;
@@ -234,5 +234,8 @@ export const indexOfIncluded = (goalArray, inputGoal) => {
 //         this._calcLevel();
 //         this._updateCurrentLevelPercent();
 //         this._sendData();
-//         }
-//     },
+        newState.lastCompleted = todaysDate;
+        newState.goalEarnedPoints = goalEarnedPoints;
+        return newState;
+    }
+}

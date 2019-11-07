@@ -3,7 +3,7 @@ import CustomButton from '../custom-button/custom-button.component';
 import { connect } from 'react-redux';
 import { toggleMenuPopupShow } from '../../redux/menu/menu.actions';
 import { checkGoal } from '../../redux/goals/goals.actions';
-import { updateProgressPoints, calcProgressPercent } from '../../redux/level-data/level-data.actions';
+import { updateProgressPoints, updateProgressPercent } from '../../redux/level-data/level-data.actions';
 
 import './goal-list.styles.scss';
 
@@ -11,20 +11,18 @@ class GoalList extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            goalList: props.goalList,
-            toggleMenuPopupShow: props.toggleMenuPopupShow,
-            checkGoal: props.checkGoal,
-            updateProgressPoints: props.updateProgressPoints,
-            calcProgressPercent: props.calcProgressPercent,
-            goalType: props.goalType,
-            goalTypeString: props.goalTypeString,
+            
         };
+    }
+
+    componentDidUpdate() {
+        console.log('goal-list update',this.state.goalList)
     }
 
     render() {
         
         const { goalList, goalType, toggleMenuPopupShow, checkGoal, 
-            updateProgressPoints, calcProgressPercent } = this.state;
+            updateProgressPoints, updateProgressPercent } = this.props;
         const goalArray = goalList[goalType];
         //console.log(goalArray);
         
@@ -44,14 +42,14 @@ class GoalList extends React.Component {
                                             // possible race conditions for these calls?
                                             checkGoal(goal);
                                             updateProgressPoints(goal); 
-                                            calcProgressPercent();
+                                            updateProgressPercent();
                                         }}
                                     /> 
                                     { goal.name } &nbsp;&nbsp; ({ goal.points } pts.)
                                 </li>
                             ))
                         }
-                        <CustomButton onClick={ toggleMenuPopupShow }>
+                        <CustomButton onClick={ toggleMenuPopupShow } inverted>
                             <div className='add-goal-button'>
                                 <span>&#43;</span>
                             </div>
@@ -66,7 +64,7 @@ const mapDispatchToProps = dispatch => ({
     toggleMenuPopupShow: () => dispatch(toggleMenuPopupShow()),
     checkGoal: goal => dispatch(checkGoal(goal)),
     updateProgressPoints: goal => dispatch(updateProgressPoints(goal)),
-    calcProgressPercent: () => dispatch(calcProgressPercent()),
+    updateProgressPercent: () => dispatch(updateProgressPercent()),
 });
 
 const mapStateToProps = state => ({

@@ -24,4 +24,4 @@ export const calcNextLevel = (level,goalPointTotal,goalCount) => {
     {
         return level;
     }
-},
+};

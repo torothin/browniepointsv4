@@ -30,7 +30,7 @@ const GoalList = ({ goalList, toggleMenuPopupShow,checkGoal,updateProgressPoints
                         </li>
                     ))
                 }
-                <CustomButton onClick={ toggleMenuPopupShow }>
+                <CustomButton onClick={ toggleMenuPopupShow } inverted>
                     <div className='add-goal-button'>
                         <span>&#43;</span>
                     </div>

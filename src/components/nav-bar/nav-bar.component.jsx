@@ -12,7 +12,7 @@ const NavBar = ({currentUser, toggleMenuHidden, menuHidden}) => {
         <div className='nav-bar'>
             {
                 currentUser &&  
-                    <CustomButton onClick={ toggleMenuHidden }>
+                    <CustomButton onClick={ toggleMenuHidden } inverted>
                         <img src={ MenuButton } alt='menu-button' />
                     </CustomButton>
             }
@@ -24,7 +24,7 @@ const NavBar = ({currentUser, toggleMenuHidden, menuHidden}) => {
             
             {
                 currentUser && 
-                    <CustomButton>
+                    <CustomButton inverted>
                         <div onClick={() => { auth.signOut()} }>Sign Out</div>
                     </CustomButton>
             }

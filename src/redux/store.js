@@ -9,4 +9,4 @@ const store = createStore(rootReducer, applyMiddleware(...middlewares));
 // alternative approach if no addition to middlewars:
 // const store = createStore(rootReducer, applyMiddleware(logger));
 
-export { store };
+export {store};

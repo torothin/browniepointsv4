@@ -1,8 +1,4 @@
-
-
-export const updateLevel = ({ level }) => {
-    return level++;
-}
+import { calcNextLevel } from '../../helpers/level-curve.helper';
 
 export const zeroProgressPoints = () => {
     //console.log("_zeroProgressPoints called");
@@ -16,57 +12,82 @@ export const zeroProgressPoints = () => {
 }
 
 export const updateProgressPoints = (progressPoints,goal) => {
-    console.log("updateProgressPoints called")
-    const newProgressPoints = progressPoints;
+    // console.log("updateProgressPoints called")
+    let newProgressPoints = progressPoints;
 
     if(goal.checked) {
-        newProgressPoints.total += goal.points;
+        newProgressPoints += goal.points;
     }
     else {
-        newProgressPoints.total -= goal.points;
+        newProgressPoints -= goal.points;
     }
     return newProgressPoints;
 }
 
-export const calculateProgressPercentage = ({points, pointsToNextLevel}) => {
-    return Math.ceil( points /  pointsToNextLevel );
+export const calculatePercentage = (points, pointsToNextLevel) => {
+    const percentage = Math.round( points /  pointsToNextLevel * 100 );
+
+    if(percentage > 100) {
+        return 100;
+    }
+    
+    return percentage;
 }
 
-// export const updateProgressPoints = ({ checkedGoals }) => {
-//    // console.log("_updateProgressPoints called");
-//     const newProgress = zeroProgressPoints();
+export const updateEarnedPoints = (earnedPoints,points) => {
+    //console.log("updateEarnedPoints called");
+    console.log(earnedPoints,points);
+    return earnedPoints + points;
+}
 
-//     checkedGoals.todos.forEach( (goal) => {
-//         newProgress.todosProgress += goal.goalPoints;
-//         newProgress.total += goal.goalPoints;
-//     });
-//     checkedGoals.dailyGoals.forEach( (goal) => {
-//         newProgress.dailyProgress += goal.goalPoints;
-//         newProgress.total += goal.goalPoints;
-//     });
-//     checkedGoals.weeklyGoals.forEach( (goal) => {
-//         newProgress.weeklyProgress += goal.goalPoints;
-//         newProgress.total += goal.goalPoints;
-//     });
-//     checkedGoals.monthlyGoals.forEach( (goal) => {
-//         newProgress.monthlyProgress += goal.goalPoints;
-//         newProgress.total += goal.goalPoints;
-//     });
+export const updateEarnedPercent = (earnedPoints,points) => {
+    //console.log("updateEarnedPoints called");
+    console.log(earnedPoints,points);
+    return earnedPoints + points;
+}
 
-//     return newProgress;
+// export const updateLevel = ({level,earnedPoints,pointsToNextLevel}) => {
+//     let currPointsToLevel = pointsToNextLevel;
+//     let tempPoints = earnedPoints - currPointsToLevel;
+//     let newLevel = level;
+    
+//     while(tempPoints >= 0) {
+//         newLevel++;
+//         earnedPoints = tempPoints;
+
+//         // calcNextLevel(level,goalPointTotal,goalCount)
+//         // this._updatePointsToNextLevel();
+
+//         //_updatePointsToNextLevel () {
+//         //  this.userData.pointsToNextLevel = this._calcNextLevel(this.userData.level);
+//         //  },
+            
+//         currPointsToLevel = pointsToNextLevel;
+//         tempPoints = earnedPoints - currPointsToLevel;
+//     }
+
+//     return newLevel;
 // }
 
-export const calcLevel = ({level,currentPoints,pointsToNextLevel}) => {
-    //console.log('\n_calcLevel called')
-    const currPointsToLevel = pointsToNextLevel;
-    const tempPoints = currentPoints - currPointsToLevel;
+export const updateLevel = state => {
+    
+    const newState = {...state};
+
+    let currPointsToLevel = newState.pointsToNextLevel;
+    let tempPoints = newState.earnedPoints - currPointsToLevel;
     
     while(tempPoints >= 0) {
-        level++;
-        currentPoints = tempPoints;
-        this._updatePointsToNextLevel();
-        currPointsToLevel = pointsToNextLevel;
-        tempPoints = currentPoints - currPointsToLevel;
+        newState.level++;
+        newState.earnedPoints = tempPoints;
+        newState.pointsToNextLevel = calcNextLevel(newState.level);
+        currPointsToLevel = newState.pointsToNextLevel;
+        tempPoints = newState.earnedPoints - currPointsToLevel;
+        // console.log( "newState.level, newState.earnedPoints, newState.pointsToNextLevel, currPointsToLevel, tempPoints");
+        // console.log( newState.level, newState.earnedPoints, newState.pointsToNextLevel, currPointsToLevel, tempPoints);
     }
-}
 
+    newState.earnedLevelPercent = calculatePercentage(newState.earnedPoints,newState.pointsToNextLevel) 
+    // console.log("newState.earnedLevelPercent",newState.earnedLevelPercent)
+
+    return newState;
+}

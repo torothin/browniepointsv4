@@ -1,6 +1,5 @@
 import React from 'react';
 import './goal-item.styles.scss';
-import CustomCheckbox from '../custom-checkbox/custom-checkbox.component';
 import { connect } from 'react-redux';
 import { checkGoal } from '../../redux/goals/goals.actions';
 
