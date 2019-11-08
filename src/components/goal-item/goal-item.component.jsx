@@ -1,7 +1,7 @@
 import React from 'react';
 import './goal-item.styles.scss';
 import { connect } from 'react-redux';
-import { checkGoal } from '../../redux/goals/goals.actions';
+import { checkGoal } from '../../redux/level-data/level-data.actions';
 
 
 

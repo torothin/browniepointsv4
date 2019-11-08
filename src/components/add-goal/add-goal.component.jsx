@@ -3,7 +3,7 @@ import './add-goal.styles.scss';
 import { toggleMenuPopupShow } from '../../redux/menu/menu.actions';
 import CustomButton from '../custom-button/custom-button.component';
 import { connect } from 'react-redux';
-import { addGoal } from '../../redux/goals/goals.actions';
+import { addGoal } from '../../redux/game-data/game-data.actions';
 
 
 class AddGoal extends React.Component {

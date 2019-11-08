@@ -14,15 +14,12 @@ class GoalContainer extends React.Component {
         };
     }
 
-    componentDidUpdate() {
-        //console.log('goal-container update',this.state.goalList)
-    }
-
     render() {
+        //console.log("goal container re-rendered");
         const {todoListShow, dailyListShow, weeklyListShow, monthlyListShow } = this.state;
-
         return(
             <div className='goal-container'>
+                
                 <CustomButton onClick={ this.toggleTodoList }> ToDos </CustomButton>
                 { 
                     todoListShow && <GoalList goalType='todo' /> 
@@ -52,6 +49,5 @@ class GoalContainer extends React.Component {
     toggleWeeklyList = () => (this.setState({weeklyListShow: !this.state.weeklyListShow}));
     toggleMonthlyList = () => (this.setState({monthlyListShow: !this.state.monthlyListShow}));
 }
-
 
 export default GoalContainer;

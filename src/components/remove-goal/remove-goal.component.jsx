@@ -32,7 +32,7 @@ const RemoveGoal = ({goalType,goalList}) => (
 );
 
 const mapStateToProps = state => ({
-    goalList: state.goals.goalList,
+    goalList: state.levelData.goalList,
 })
 
 export default connect(mapStateToProps)(RemoveGoal);

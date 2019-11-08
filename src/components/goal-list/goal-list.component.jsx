@@ -2,8 +2,8 @@ import React from 'react';
 import CustomButton from '../custom-button/custom-button.component';
 import { connect } from 'react-redux';
 import { toggleMenuPopupShow } from '../../redux/menu/menu.actions';
-import { checkGoal } from '../../redux/goals/goals.actions';
-import { updateProgressPoints, updateProgressPercent } from '../../redux/level-data/level-data.actions';
+import { checkGoal, updateProgressPoints, updateProgressPercent } from '../../redux/game-data/game-data.actions';
+import CheckBox from '../check-box/check-box.component';
 
 import './goal-list.styles.scss';
 
@@ -16,50 +16,58 @@ class GoalList extends React.Component {
     }
 
     componentDidUpdate() {
-        console.log('goal-list update',this.state.goalList)
+        //console.log('goal-list update')
     }
 
     render() {
+        //console.log("rendered goal-list");
+        const { goalType, toggleMenuPopupShow } = this.props; //checkGoal, updateProgressPoints, updateProgressPercent
+        const goalArray = this.props.goalList[goalType];
         
-        const { goalList, goalType, toggleMenuPopupShow, checkGoal, 
-            updateProgressPoints, updateProgressPercent } = this.props;
-        const goalArray = goalList[goalType];
-        //console.log(goalArray);
-        
-        return (
-            <div className='goal-section'>
-                <div className='goal-box'>
-                    <ul>
-                        {
-                            goalArray && goalArray.map(goal => (
-                                <li key={ goal.ID } > 
-                                    <input 
-                                        className='largerCheckbox' 
-                                        type="checkbox" 
-                                        key={ goal.ID }
-                                        defaultChecked={ goal.checked }
-                                        onChange={()=>{ 
-                                            // possible race conditions for these calls?
-                                            checkGoal(goal);
-                                            updateProgressPoints(goal); 
-                                            updateProgressPercent();
-                                        }}
-                                    /> 
-                                    { goal.name } &nbsp;&nbsp; ({ goal.points } pts.)
-                                </li>
-                            ))
-                        }
-                        <CustomButton onClick={ toggleMenuPopupShow } inverted>
-                            <div className='add-goal-button'>
-                                <span>&#43;</span>
-                            </div>
-                        </CustomButton>
-                    </ul>
-                </div>
-            </div>  
+        return ( 
+            <div className='goal-box'>
+                <ul>
+                    {
+                        //console.log("inside goal-box")
+                    }
+                    {
+                        goalArray && goalArray.map(goal => (
+                            <li key={ goal.ID } onClick={()=>{ 
+                                //console.log("onchange");
+                                this.handleChange(goal,goal.checked);
+                            }}> 
+                                <CheckBox goal={ goal } checked={ goal.checked }  />
+                                
+                                { goal.name } &nbsp; Checked: {`${ goal.checked }`} &nbsp;&nbsp; ({ goal.points } pts.)
+                            </li>
+                        ))
+                    }
+                    <CustomButton onClick={ toggleMenuPopupShow } inverted>
+                        <div className='add-goal-button'>
+                            <span>&#43;</span>
+                        </div>
+                    </CustomButton>
+                </ul>
+            </div>
+           
         )
     }
-}
+
+    handleChange = (goal) => {
+        // possible race conditions for these calls?  
+        
+        // have to reverse this because it will update points before the goal is update with
+        // the new checked value, ideally checkGoal completes and I use the new goal data to update 
+        // points. Todo maybe
+        const checked = !goal.checked;
+        this.props.checkGoal(goal);
+        this.props.updateProgressPoints({checked,goal}); 
+        this.props.updateProgressPercent();
+    }
+};
+
+
+
 const mapDispatchToProps = dispatch => ({
     toggleMenuPopupShow: () => dispatch(toggleMenuPopupShow()),
     checkGoal: goal => dispatch(checkGoal(goal)),
@@ -68,8 +76,8 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const mapStateToProps = state => ({
-    goalList: state.goals.goalList,
-})
+    goalList: state.gameData.goalList,
+});
 
 export default connect(mapStateToProps,mapDispatchToProps)(GoalList);
 

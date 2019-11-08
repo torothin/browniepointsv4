@@ -2,8 +2,12 @@ import React from 'react';
 import './user-section.styles.scss';
 import { connect } from 'react-redux';
 import CustomButton from '../custom-button/custom-button.component';
-import { updateLevel,updateEarnedPoints,updateEarnedPercent } from '../../redux/level-data/level-data.actions';
-import { completeGoalsTest,resetEarnedPoints } from '../../redux/goals/goals.actions';
+import {  
+            completeGoalsTest, 
+            updateLevel,
+            updateEarnedPoints,
+            updateEarnedPercent 
+        } from '../../redux/game-data/game-data.actions';
 
 class UserSection extends React.Component { 
     constructor(props) {
@@ -12,20 +16,14 @@ class UserSection extends React.Component {
         };
     } 
 
-    componentWillUpdate () {
-          
-    }
-
     componentDidUpdate () {
         console.log("user section updated");
-        this.props.updateEarnedPoints(this.props.goalEarnedPoints);
-        this.props.updateEarnedPercent();
-        this.props.resetEarnedPoints();
+        
     }
 
     render () {
 
-        const { currentUser, level, progressLevelPercent, earnedLevelPercent, updateLevel, goalEarnedPoints } = this.props;
+        const { currentUser, level, progressLevelPercent, earnedLevelPercent, updateLevel } = this.props;
 
         const progressStyle =  {
             width: `${progressLevelPercent}%`,
@@ -55,20 +53,10 @@ class UserSection extends React.Component {
                 <CustomButton onClick={() => 
                             { 
                                 this.props.completeGoalsTest();
+                                this.props.updateEarnedPercent();
                             }}>Check Completion</CustomButton>
             </div>
         )}
-    // handleClick = async () => {
-    //     let test =  new Promise(
-    //         (resolve) => {
-    //             this.state.completeGoalsTest();
-    //             setTimeout(() => resolve("done"), 5000);
-    //             this.setState({goalEarnedPoints:this.props.goalEarnedPoints})
-    //         });
-
-    //     await this.state.updateEarnedPoints(this.state.goalEarnedPoints); 
-    //     await this.state.resetEarnedPoints();
-    // };
 };
 
 
@@ -77,7 +65,6 @@ class UserSection extends React.Component {
 const mapDispatchToProps = dispatch => ({
     updateLevel: () => dispatch(updateLevel()),
     completeGoalsTest: () => dispatch(completeGoalsTest()),
-    resetEarnedPoints: () => dispatch(resetEarnedPoints()),
     updateEarnedPoints: (points) => dispatch(updateEarnedPoints(points)),
     updateEarnedPercent: () => dispatch(updateEarnedPercent()),
 
@@ -85,10 +72,9 @@ const mapDispatchToProps = dispatch => ({
 
 const mapStateToProps = state => ({
     currentUser: state.user.currentUser,
-    level: state.levelData.level,
-    progressLevelPercent: state.levelData.progressLevelPercent,
-    earnedLevelPercent: state.levelData.earnedLevelPercent,
-    goalEarnedPoints: state.goals.goalEarnedPoints,
+    level: state.gameData.level,
+    progressLevelPercent: state.gameData.progressLevelPercent,
+    earnedLevelPercent: state.gameData.earnedLevelPercent,
 
 });
 
