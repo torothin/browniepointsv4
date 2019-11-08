@@ -122,7 +122,7 @@ const newCheckedDate = (goalType) => {
     }
 
     const returnDate = convertToBasicDate(newDate);
-    console.log(returnDate);
+    // console.log(returnDate);
     return returnDate;
 
 };

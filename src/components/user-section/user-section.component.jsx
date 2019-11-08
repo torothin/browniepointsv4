@@ -1,7 +1,7 @@
 import React from 'react';
 import './user-section.styles.scss';
 import { connect } from 'react-redux';
-import CustomButton from '../custom-button/custom-button.component';
+// import CustomButton from '../custom-button/custom-button.component';
 import {  
             completeGoalsTest, 
             updateLevel,
@@ -19,6 +19,18 @@ class UserSection extends React.Component {
     componentDidUpdate () {
         console.log("user section updated");
         
+    }
+
+    componentDidMount () {
+        // updates when the app is first loaded
+        this.props.completeGoalsTest();
+        this.props.updateLevel();
+
+        // these autoupdates occur to test for completions everytime window becomes focus or
+        // leaves focus so that if the game is left open over night the game will update when
+        // becomes the focus again
+        this.autoUpdate('focus');
+        this.autoUpdate('blur');
     }
 
     render () {
@@ -49,14 +61,22 @@ class UserSection extends React.Component {
                     <div className='level'><div>{ level }</div></div>
                     <div className='reward-image'>Reward<div></div></div>
                 </div>
-                <CustomButton onClick={ updateLevel }>Update Level</CustomButton>
+                {/* <CustomButton onClick={ updateLevel }>Update Level</CustomButton>
                 <CustomButton onClick={() => 
                             { 
                                 this.props.completeGoalsTest();
                                 this.props.updateEarnedPercent();
-                            }}>Check Completion</CustomButton>
+                            }}>Check Completion</CustomButton> */}
             </div>
         )}
+    
+    autoUpdate = (eventType) => {
+        window.addEventListener(eventType, (event) => {
+        console.log(eventType, "update");
+        this.props.completeGoalsTest();
+        this.props.updateLevel();
+        });
+    }
 };
 
 

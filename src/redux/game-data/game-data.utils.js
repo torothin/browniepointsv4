@@ -1,8 +1,6 @@
-import { convertToBasicDate, newBasicDate, leftGreaterRight, 
-    leftGreaterOrEqualRight, printMyDate, newCheckedDate } from '../../helpers/basic-date.helper';
-import { gameDataReducer } from '../game-data/game-data.reducer';
+import { newBasicDate, leftGreaterRight, 
+    leftGreaterOrEqualRight, newCheckedDate } from '../../helpers/basic-date.helper';
 import { calcNextLevel } from '../../helpers/level-curve.helper';
-import { database } from 'firebase';
 
 export const addGoal = (currentGoals, goalID, newGoal) => {
     
@@ -93,7 +91,7 @@ export const completeGoals = state => {
     let earnedPoints = state.earnedPoints;
     let progressPoints = state.progressPoints;
     let newState = {...state};
-    console.log("completeGoals",state === newState);
+    // console.log("completeGoals",state === newState);
 
 //     // -------------   Testing Setup   -------------
 //     // console.log('----------------------------------');
@@ -115,50 +113,48 @@ export const completeGoals = state => {
     if(!newState.lastUpdate || leftGreaterRight(todaysDate,newState.lastUpdate))
     {
         //console.log('updating complete goals');
+        
+        // completing todo goals
+        let todoCheckedGoalsLength = newState.goalList.todo.length;
+        let i = todoCheckedGoalsLength;
 
-//         // todos
-//         let todosCheckedGoalsLength = this.userData.checkedGoals.todos.length;
-//         let m = this.userData.checkedGoals.todos.length;
+        while(i > 0)
+        {
+            let tempTodoGoal = newState.goalList.todo.pop();
+            //console.log(tempDailyGoal);
+            
+            //if the goal is not really complete i.e proper amount of time has not passed
+            //this is true if today > checkedDate (1 day has passed)
+        
+            if( tempTodoGoal.nextCompletion && 
+                leftGreaterOrEqualRight(todaysDate,tempTodoGoal.nextCompletion) &&
+                tempTodoGoal.checked) {
 
-//         while(m > 0)
-//         {
-//             let tempTodoGoal = this.userData.checkedGoals.todos.pop();
+                    tempTodoGoal.checked = false;
+                    tempTodoGoal.nextCompletion = null;
+                    tempTodoGoal.lastCompleted = todaysDate;
+
+                //how to update earned points in the level-data reducer
+                earnedPoints += tempTodoGoal.points;
+                progressPoints -= tempTodoGoal.points;
+                
+            }
+            else
+            {
+                newState.goalList.todo.unshift(tempTodoGoal);
+            }
+
             
-//             //if the goal is not really complete i.e proper amount of time has not passed
-//             //this is true if today > checkedDate (1 day has passed)
-         
-//             if( tempTodoGoal.completeDate != null && 
-//                 this._leftGreaterOrEqualRight(todaysDate,tempTodoGoal.completeDate))
-               
-//             {
-//                 // console.log("completed goal: " + tempTodoGoal.goalName);
-//                 this.userData.progress.todoProgress -= tempTodoGoal.goalPoints;
-//                 this.userData.currentPoints += tempTodoGoal.goalPoints;
-//                 let removingIndex = this._indexOfIncluded(this.userData.goals.todos, tempTodoGoal);
-//                 // console.log("removingIndex: " + removingIndex)
-//                 // console.log("goalName[removingIndex]: " + this.userData.goals.todos[removingIndex].goalName);
-//                 // console.log("before splice");
-//                 if(removingIndex >= 0)
-//                 {
-//                     // console.log(this.userData.goals.todos.splice(removingIndex,1).goalName);
-//                     this.userData.goals.todos.splice(removingIndex,1);
-                    
-//                     }
-//                 }
-//             else
-//             {
-//                 this.userData.checkedGoals.todos.unshift(tempTodoGoal);
-//                 tempTodoGoal = null;
-//                 }
-//             m--;
-            
-//             }
+            //checkGoal(newState.goalList,newState.goalList.daily);
+            tempTodoGoal = null;  
+            i--;
+        }
 
         // completing daily goals
         let dailyCheckedGoalsLength = newState.goalList.daily.length;
-        let i = dailyCheckedGoalsLength;
+        let j = dailyCheckedGoalsLength;
 
-        while(i > 0)
+        while(j > 0)
         {
             let tempDailyGoal = newState.goalList.daily.pop();
             //console.log(tempDailyGoal);
@@ -183,64 +179,73 @@ export const completeGoals = state => {
             newState.goalList.daily.unshift(tempDailyGoal);
             //checkGoal(newState.goalList,newState.goalList.daily);
             tempDailyGoal = null;  
-            i--;
+            j--;
+        }
+
+        // weekly goal checking
+        let weeklyCheckedGoalsLength = newState.goalList.weekly.length;
+        let k = weeklyCheckedGoalsLength;
+
+        while(k > 0)
+        {
+            let tempWeeklyGoal = newState.goalList.weekly.pop();
+            //console.log(tempWeeklyGoal);
+            
+            //if the goal is not really complete i.e proper amount of time has not passed
+            //this is true if today > checkedDate (1 day has passed)
+         
+            if( tempWeeklyGoal.nextCompletion && 
+                leftGreaterOrEqualRight(todaysDate,tempWeeklyGoal.nextCompletion) &&
+                tempWeeklyGoal.checked) {
+
+                    tempWeeklyGoal.checked = false;
+                    tempWeeklyGoal.nextCompletion = null;
+                    tempWeeklyGoal.lastCompleted = todaysDate;
+
+                //how to update earned points in the level-data reducer
+                earnedPoints += tempWeeklyGoal.points;
+                progressPoints -= tempWeeklyGoal.points;
+                
+            }
+
+            newState.goalList.weekly.unshift(tempWeeklyGoal);
+            //checkGoal(newState.goalList,newState.goalList.weekly);
+            tempWeeklyGoal = null;  
+            k--;
+        }
+
+        // monthly goal checking
+        let monthlyCheckedGoalsLength = newState.goalList.monthly.length;
+        let m = monthlyCheckedGoalsLength;
+
+        while(m > 0)
+        {
+            let tempMonthlyGoal = newState.goalList.monthly.pop();
+            //console.log(tempWeeklyGoal);
+            
+            //if the goal is not really complete i.e proper amount of time has not passed
+            //this is true if today > checkedDate (1 day has passed)
+         
+            if( tempMonthlyGoal.nextCompletion && 
+                leftGreaterOrEqualRight(todaysDate,tempMonthlyGoal.nextCompletion) &&
+                tempMonthlyGoal.checked) {
+
+                    tempMonthlyGoal.checked = false;
+                    tempMonthlyGoal.nextCompletion = null;
+                    tempMonthlyGoal.lastCompleted = todaysDate;
+
+                //how to update earned points in the level-data reducer
+                earnedPoints += tempMonthlyGoal.points;
+                progressPoints -= tempMonthlyGoal.points;
+                
+            }
+
+            newState.goalList.monthly.unshift(tempMonthlyGoal);
+            //checkGoal(newState.goalList,newState.goalList.weekly);
+            tempMonthlyGoal = null;  
+            m--;
         }
         
-//         // Checking Weekly Goals
-//         let weeklyCheckedGoalsLength = this.userData.checkedGoals.weeklyGoals.length;
-//         let j = this.userData.checkedGoals.weeklyGoals.length;
-
-//         while(j > 0)
-//         {
-//             let tempWeeklyGoal = this.userData.checkedGoals.weeklyGoals.pop();
-
-//             if( tempWeeklyGoal.completeDate != null &&
-//                 this._leftGreaterOrEqualRight(todaysDate,tempWeeklyGoal.completeDate) )
-//             {
-//                 //console.log("completed goal: " + tempWeeklyGoal.goalName);
-//                 this.userData.progress.weeklyProgress -= tempWeeklyGoal.goalPoints;
-//                 this.userData.currentPoints += tempWeeklyGoal.goalPoints;
-//                 }
-//             else
-//             {
-//                 this.userData.checkedGoals.weeklyGoals.unshift(tempWeeklyGoal);
-//                 tempWeeklyGoal = null;   
-//                 }
-//             j--;
-//             }
-
-//         let monthlyCheckedGoalsLength = this.userData.checkedGoals.monthlyGoals.length;
-//         let k = this.userData.checkedGoals.monthlyGoals.length;
-
-//         while(k > 0)
-//         {
-//             let tempMonthlyGoal = this.userData.checkedGoals.monthlyGoals.pop();
-            
-//             if( tempMonthlyGoal.completeDate != null && 
-//                 this._leftGreaterOrEqualRight(todaysDate,tempMonthlyGoal.completeDate) )
-//             {
-//                 console.log("completed goal: " + tempMonthlyGoal.goalName);
-//                 this.userData.progress.monthlyProgress -= tempMonthlyGoal.goalPoints;
-//                 this.userData.currentPoints += tempMonthlyGoal.goalPoints;
-                
-//                 }
-//             else
-//             {
-//                 console.log("not completed goal: " + tempMonthlyGoal.goalName);
-//                 this.userData.checkedGoals.monthlyGoals.unshift(tempMonthlyGoal);
-//                 tempMonthlyGoal = null;
-//             }
-//             console.log("completing monthly goals");
-//             console.log(this.userData.checkedGoals.monthlyGoals);
-//             k--;
-//             }
-
-//         this.userData.lastUpdate = todaysDate;
-//         // console.log(this._printMyDate(this.userData.lastUpdate));
-//         this._updateProgress();
-//         this._calcLevel();
-//         this._updateCurrentLevelPercent();
-//         this._sendData();
         newState.lastCompleted = todaysDate;
         newState.earnedPoints = earnedPoints;
         newState.progressPoints = progressPoints;
@@ -293,29 +298,6 @@ export const updateEarnedPercent = (earnedPoints,points) => {
     console.log(earnedPoints,points);
     return earnedPoints + points;
 }
-
-// export const updateLevel = ({level,earnedPoints,pointsToNextLevel}) => {
-//     let currPointsToLevel = pointsToNextLevel;
-//     let tempPoints = earnedPoints - currPointsToLevel;
-//     let newLevel = level;
-    
-//     while(tempPoints >= 0) {
-//         newLevel++;
-//         earnedPoints = tempPoints;
-
-//         // calcNextLevel(level,goalPointTotal,goalCount)
-//         // this._updatePointsToNextLevel();
-
-//         //_updatePointsToNextLevel () {
-//         //  this.userData.pointsToNextLevel = this._calcNextLevel(this.userData.level);
-//         //  },
-            
-//         currPointsToLevel = pointsToNextLevel;
-//         tempPoints = earnedPoints - currPointsToLevel;
-//     }
-
-//     return newLevel;
-// }
 
 export const updateLevel = state => {
     

@@ -7,7 +7,7 @@ const CheckBox = (props) => {
             className='largerCheckbox' 
             type="checkbox" 
             key={ props.goal.ID }
-            checked={ props.checked }
+            checked={ props.goalchecked }
         /> 
     )
 }

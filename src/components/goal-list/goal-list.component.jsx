@@ -17,6 +17,7 @@ class GoalList extends React.Component {
 
     componentDidUpdate() {
         //console.log('goal-list update')
+        this.props.updateProgressPercent();
     }
 
     render() {
@@ -28,15 +29,12 @@ class GoalList extends React.Component {
             <div className='goal-box'>
                 <ul>
                     {
-                        //console.log("inside goal-box")
-                    }
-                    {
                         goalArray && goalArray.map(goal => (
-                            <li key={ goal.ID } onClick={()=>{ 
+                            <li key={ goal.ID } onChange={()=>{ 
                                 //console.log("onchange");
-                                this.handleChange(goal,goal.checked);
+                                this.handleChange(goal);
                             }}> 
-                                <CheckBox goal={ goal } checked={ goal.checked }  />
+                                <CheckBox goal={ goal } goalchecked={ goal.checked }  />
                                 
                                 { goal.name } &nbsp; Checked: {`${ goal.checked }`} &nbsp;&nbsp; ({ goal.points } pts.)
                             </li>
@@ -65,8 +63,6 @@ class GoalList extends React.Component {
         this.props.updateProgressPercent();
     }
 };
-
-
 
 const mapDispatchToProps = dispatch => ({
     toggleMenuPopupShow: () => dispatch(toggleMenuPopupShow()),
