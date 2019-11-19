@@ -51,7 +51,7 @@ class UserSection extends React.Component {
         const { currentUser, level, progressLevelPercent, earnedLevelPercent, showRewardPopup } = this.props;
 
         const progressStyle =  {
-            width: `${progressLevelPercent}%`,
+            width: `${this.progressBarCalculation(progressLevelPercent,earnedLevelPercent)}%`,
         }
     
         const currentStyle = {
@@ -69,8 +69,8 @@ class UserSection extends React.Component {
                 }
                 </div>
                 <div className='progress-bar-container'>
-                    <div className='current-level-bar' style={currentStyle}>{ earnedLevelPercent }%</div>
-                    <div className='progress-bar' style={progressStyle} ></div>
+                    <div className='earned-bar' style={currentStyle}><div>{ earnedLevelPercent }%</div></div>
+                    <div className='progress-bar' style={ progressStyle } ></div>
                     
                 </div>
                 <div className='level-container'>
@@ -103,6 +103,14 @@ class UserSection extends React.Component {
             this.props.toggleRewardPopup();
             this.setState({level:level});
         }
+    }
+
+    progressBarCalculation = (progressPercent, earnedPercent) => {
+        let totalPercent = progressPercent + earnedPercent;
+
+        if(totalPercent > 100) return 100;
+        else return totalPercent;
+
     }
     
 };

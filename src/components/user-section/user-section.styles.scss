@@ -19,32 +19,36 @@
 }
 
 .progress-bar-container {
-    text-align: center;
+    position: relative;
     width: 80%;
-    height:45px; 
+    height:45px;
     margin: 20px auto 0px;
     box-shadow:inset 2px 5px 10px #555;
     border-radius:10px;
-    display: inline-flex;
     background-color: $color-white;
     
-    .current-level-bar {
+    .earned-bar {
+        position: absolute;
+        height:45px; 
         font-size: 30px;
-        vertical-align: middle;
-        text-align: center;
         background-color: $color-level-bar;
         color: black;
-        display: flex;
         border-radius: 10px;
-        float: left;
-        padding: 3px;
+        z-index: 200;
+
+        div {
+            padding-top: 4px;
+        }
     }
       
     .progress-bar {
+        position: absolute;
+        height:45px; 
         background-color: $color-progress-bar;
         border-radius:10px;
-        display: flex;
-        float: left;
+        //display: flex;
+        //float: left;
+        z-index: 100;
     }
 }
 
@@ -71,17 +75,5 @@
             padding-top: 45px;
         }
     }
-    
-    // .reward-image {
-    //     height: 150px;
-    //     width: 200px;
-    //     vertical-align: center;
-    //     margin: 0px auto 0px; 
-    //     background-size: 100%;
-    //     background-repeat: no-repeat;
-    //     background-color:rgb(255, 255, 255);
-    //     background-position: center;
-    //     border-radius:10px;
-    // }
 }
 
