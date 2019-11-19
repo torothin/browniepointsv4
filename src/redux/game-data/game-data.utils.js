@@ -23,6 +23,14 @@ export const addGoal = (currentGoals, goalID, newGoal) => {
     return newGoalList;
 }
 
+export const removeGoal = (goalList, goal) => {
+    let newGoalList = {...goalList};
+    newGoalList[goal.type] = goalList[goal.type]
+        .filter((goalInput) => goalInput.ID !== goal.ID);
+    
+    return newGoalList;
+}
+
 export const checkGoal = (currentGoals,goal) => {
     
     const tempGoal = {...goal};
@@ -38,6 +46,9 @@ export const checkGoal = (currentGoals,goal) => {
     else if(!tempGoal.checked){
         tempGoal.checked = true;
         tempGoal.nextCompletion = newCheckedDate(goal.type);
+
+        //for testing
+        tempGoal.nextCompletion.year -= 1;
     }
     else {
         return currentGoals;
@@ -79,7 +90,10 @@ export const completeGoalsTest = state => {
     newState.lastUpdate.year = 2018;
 
     // console.log("completeGoalsTest",state === newState);
-    return completeGoals(newState);
+    let returnState = {...completeGoals(newState)}
+    returnState.lastUpdate = newBasicDate();
+    returnState.lastUpdate.year = 2018;
+    return returnState;
 }
 
 export const resetEarnedPoints = () => {
@@ -90,6 +104,8 @@ export const completeGoals = state => {
     const todaysDate = newBasicDate();
     let earnedPoints = state.earnedPoints;
     let progressPoints = state.progressPoints;
+    let goalCount = state.goalCount;
+    let goalPointTotal = state.goalPointTotal;
     let newState = {...state};
     // console.log("completeGoals",state === newState);
 
@@ -130,13 +146,10 @@ export const completeGoals = state => {
                 leftGreaterOrEqualRight(todaysDate,tempTodoGoal.nextCompletion) &&
                 tempTodoGoal.checked) {
 
-                    tempTodoGoal.checked = false;
-                    tempTodoGoal.nextCompletion = null;
-                    tempTodoGoal.lastCompleted = todaysDate;
-
-                //how to update earned points in the level-data reducer
                 earnedPoints += tempTodoGoal.points;
                 progressPoints -= tempTodoGoal.points;
+                goalCount -= 1;
+                goalPointTotal -= tempTodoGoal.points;
                 
             }
             else
@@ -249,8 +262,21 @@ export const completeGoals = state => {
         newState.lastCompleted = todaysDate;
         newState.earnedPoints = earnedPoints;
         newState.progressPoints = progressPoints;
+        newState.goalCount = goalCount;
+        newState.goalPointTotal = goalPointTotal;
+        newState.pointsToNextLevel = calcPointsToLevel(newState.level, newState.goalPointTotal, newState.goalCount)
         return newState;
     }
+}
+
+export const countGoals = goalList => {
+    let goalCount = 0;
+    goalCount += goalList.todo.length;
+    goalCount += goalList.daily.length;
+    goalCount += goalList.weekly.length;
+    goalCount += goalList.monthly.length;
+
+    return goalCount;
 }
 
 export const zeroProgressPoints = () => {
@@ -309,7 +335,8 @@ export const updateLevel = state => {
     while(tempPoints >= 0) {
         newState.level++;
         newState.earnedPoints = tempPoints;
-        newState.pointsToNextLevel = calcNextLevel(newState.level);
+        //console.log('newState.level,newState.goalPointTotal,newState.goalCount',newState.level,newState.goalPointTotal,newState.goalCount)
+        newState.pointsToNextLevel = calcNextLevel(newState.level,newState.goalPointTotal,newState.goalCount);
         currPointsToLevel = newState.pointsToNextLevel;
         tempPoints = newState.earnedPoints - currPointsToLevel;
         // console.log( "newState.level, newState.earnedPoints, newState.pointsToNextLevel, currPointsToLevel, tempPoints");
@@ -320,4 +347,13 @@ export const updateLevel = state => {
     // console.log("newState.earnedLevelPercent",newState.earnedLevelPercent)
 
     return newState;
+}
+
+export const calcPointsToLevel = (level, goalPoints, goalCount) => {
+    return calcNextLevel(level,goalPoints,goalCount);
+}
+
+export const addReward = (rewardList, rewardData) => {
+    console.log(rewardList, rewardData.rewardName, rewardData.rewardType);
+    return {...rewardList};
 }

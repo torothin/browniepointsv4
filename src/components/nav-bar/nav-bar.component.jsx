@@ -12,9 +12,11 @@ const NavBar = ({currentUser, toggleMenuHidden, menuHidden}) => {
         <div className='nav-bar'>
             {
                 currentUser &&  
-                    <CustomButton onClick={ toggleMenuHidden } inverted>
-                        <img src={ MenuButton } alt='menu-button' />
-                    </CustomButton>
+                    <div>
+                        <CustomButton onClick={ toggleMenuHidden } inverted>
+                            <img src={ MenuButton } alt='menu-button' />
+                        </CustomButton>
+                    </div>
             }
             
             {
@@ -24,9 +26,11 @@ const NavBar = ({currentUser, toggleMenuHidden, menuHidden}) => {
             
             {
                 currentUser && 
-                    <CustomButton inverted>
-                        <div onClick={() => { auth.signOut()} }>Sign Out</div>
-                    </CustomButton>
+                    <div>
+                        <CustomButton inverted>
+                            <div onClick={() => { auth.signOut()} }>Sign Out</div>
+                        </CustomButton>
+                    </div>
             }
             {
                 (!menuHidden && currentUser) && <Menu />

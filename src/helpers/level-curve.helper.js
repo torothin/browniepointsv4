@@ -11,13 +11,15 @@ export const calcNextLevel = (level,goalPointTotal,goalCount) => {
     // of points for each goal while others will use large values
     
     // need to update to percentages to prevent overflow
+    console.log('goalPointTotal,goalCount',goalPointTotal,goalCount);
     if(goalPointTotal && goalCount)
     {
         const pointAvg = Math.round(goalPointTotal/goalCount);
+        //alert("pointAvg",pointAvg);
         const xpNeeded = pointAvg * Math.ceil( coeffA * Math.pow(level,3) 
                                            + coeffB * Math.pow(level,2) 
                                            + coeffC * Math.pow(level,1) );
-
+        //alert('xpNeeded',xpNeeded);
         return xpNeeded;
     }
     else //this is just in case pointAvg ends up 0 or inf due to no goals

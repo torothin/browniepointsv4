@@ -1,9 +1,10 @@
 import React from 'react';
 import './add-goal.styles.scss';
-import { toggleMenuPopupShow } from '../../redux/menu/menu.actions';
+import { toggleMenuPopupShow, menuSelection } from '../../redux/menu/menu.actions';
 import CustomButton from '../custom-button/custom-button.component';
 import { connect } from 'react-redux';
-import { addGoal } from '../../redux/game-data/game-data.actions';
+import { addGoal, calcPointsToLevel, updateEarnedPercent, 
+    updateProgressPercent, updateLevel } from '../../redux/game-data/game-data.actions';
 
 
 class AddGoal extends React.Component {
@@ -27,7 +28,12 @@ class AddGoal extends React.Component {
         event.preventDefault();
         const {name, type, ID, points} = this.state;
         this.props.addGoal({name, type, ID, points});
-        this.props.toggleMenuPopupShow("accept");
+        this.props.calcPointsToLevel();
+        this.props.updateEarnedPercent();
+        this.props.updateProgressPercent();
+        this.props.updateLevel();
+        this.props.toggleMenuPopupShow();
+        this.props.menuSelection("Close Popup");
         
     }
     
@@ -87,12 +93,15 @@ const mapDispatchToProps = dispatch => ({
     addGoal: (goalData) => 
         dispatch(addGoal(goalData)),
     toggleMenuPopupShow: (result) => dispatch(toggleMenuPopupShow(result)),
-   
+    menuSelection: (selection) => dispatch(menuSelection(selection)),
+    calcPointsToLevel: () => dispatch(calcPointsToLevel()),
+    updateEarnedPercent: () => dispatch(updateEarnedPercent()),
+    updateProgressPercent: () => dispatch(updateProgressPercent()),
+    updateLevel: () => dispatch(updateLevel()),
 });
 
 const mapStateToProps = state => ({
     menuPopupShow: state.menu.menuPopupShow,
-    //menuSelection: state.menu.menuSelection,
 });
 
 export default connect(mapStateToProps,mapDispatchToProps)(AddGoal);

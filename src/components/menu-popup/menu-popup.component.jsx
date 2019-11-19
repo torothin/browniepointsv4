@@ -2,40 +2,42 @@ import React from 'react';
 import './menu-popup.styles.scss';
 import { connect } from 'react-redux';
 import CustomButton from '../custom-button/custom-button.component';
-import { toggleMenuPopupShow } from '../../redux/menu/menu.actions';
+import { toggleMenuPopupShow, menuSelection } from '../../redux/menu/menu.actions';
 import AddGoal from '../add-goal/add-goal.component';
 import AddReward from '../add-reward/add-reward.component';
 import RemoveGoal from '../remove-goal/remove-goal.component';
 import RemoveReward from '../remove-reward/remove-reward.component';
 
-const MenuPopup = ({ toggleMenuPopupShow,menuSelection }) => (
+const MenuPopup = ({ toggleMenuPopupShow, selectedMenu }) => (
     <div className='menu-popup-background'>
         <div className='menu-popup'>
             <div className='popup-contents'>
                 {
-                    menuSelection.addGoal
+                    console.log(selectedMenu)
+                }
+                {
+                    selectedMenu.addGoal
                     ?
                     <AddGoal />
                     :
                     null 
                 }
-
                 {
-                    menuSelection.addReward
+                    selectedMenu.addReward
                     ?
                     <AddReward />
                     :
                     null 
                 }
                 {
-                    menuSelection.removeGoal
+                    selectedMenu.removeGoal
                     ?
                     <RemoveGoal />
                     :
                     null 
                 }
                 {
-                    menuSelection.removeReward
+                    selectedMenu.removeReward
                     ?
                     <RemoveReward />
                     :
@@ -44,7 +46,13 @@ const MenuPopup = ({ toggleMenuPopupShow,menuSelection }) => (
                 
             </div>
             <div className='button-container'>
-                <CustomButton id='popupButton' onClick = { ()=> { toggleMenuPopupShow("cancel") }}>Cancel</CustomButton>
+                <CustomButton
+                    id='popupButton' 
+                    onClick = { ()=> { 
+                        toggleMenuPopupShow("cancel");
+                        menuSelection("Close Popup");
+                    }}>Cancel
+                </CustomButton>
             </div>
         </div>
         
@@ -53,11 +61,12 @@ const MenuPopup = ({ toggleMenuPopupShow,menuSelection }) => (
 
 const mapDispatchToProps = dispatch => ({
     toggleMenuPopupShow: (result) => dispatch(toggleMenuPopupShow(result)),
+    menuSelection: (selection) => dispatch(menuSelection(selection)),
 });
 
 const mapStateToProps = state => ({
     menuPopupShow: state.menu.menuPopupShow,
-    menuSelection: state.menu.menuSelection,
+    selectedMenu: state.menu.selectedMenu,
 })
 
 export default connect(mapStateToProps,mapDispatchToProps)(MenuPopup);

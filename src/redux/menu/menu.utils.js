@@ -21,6 +21,14 @@ export const menuSelectionHelper = (payload, menuSelection) => {
                 ...menuSelection,
                 removeReward: true,
             };
+        case "Close Popup":
+            return {
+                ...menuSelection,
+                addGoal: false,
+                removeGoal: false,
+                addReward: false,
+                removeReward: false,
+            }
         default:
             return menuSelection;
     }

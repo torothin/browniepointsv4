@@ -8,7 +8,7 @@ const INITIAL_STATE = {
     dailyListShow: true,
     weeklyListShow: true,
     monthlyListShow: true,
-    menuSelection: {
+    selectedMenu: {
         addGoal: false,
         removeGoal: false,
         addReward: false,
@@ -55,7 +55,7 @@ const menuReducer = (state = INITIAL_STATE, action) => {
         case MenuActionTypes.MENU_SELECTION:
             return {
                 ...state,
-                menuSelection: menuSelectionHelper(action.payload, state.menuSelection),
+                selectedMenu: menuSelectionHelper(action.payload, state.selectedMenu),
                 
             };
         case MenuActionTypes.MENU_ACCEPT:

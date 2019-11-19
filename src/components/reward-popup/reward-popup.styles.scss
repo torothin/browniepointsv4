@@ -1,7 +1,6 @@
 @import '../assets/color-palate.styles.scss';
 
-
-.menu-popup-background {
+.reward-popup-background {
     background-color: #0000008f;
     position: fixed;
     top:0;
@@ -12,9 +11,10 @@
     z-index: 1000;
 }
 
-.menu-popup {
+.reward-popup {
     background-color: $color-light-grey;
     width: 300px;
+    height: 300px;
     margin: 150px auto;
     text-align: center;
     padding:10px;
@@ -23,19 +23,21 @@
 }
 
 .popup-contents {
-    height: 150px;
+    height: 1000px;
     width: 250px;
     margin: 10px auto;
     // border: solid 2px blue;
 }
 
-.button-container {
-    display: flex;
-    flex-direction: row;
-    width: 80%;
-    margin: auto;
+.reward-type-container {
+    margin: 20px auto;
+}
 
-    #popupButton {
-        margin: auto;
-    }
+.reward-image-container {
+    height: 100%;
+}
+
+.button-container {
+    margin: auto 20px;
+
 }

@@ -1,20 +1,23 @@
 import { GameDataActionTypes } from './game-data.types';
-import { updateProgressPoints, calculatePercentage, updateLevel, updateEarnedPoints, addGoal, checkGoal, completeGoalsTest, completeGoals, resetEarnedPoints } from './game-data.utils';
-import { precreatedGoals, precreatedCompletedGoals } from '../../test-scripts/goals-test';
+import { countGoals, calcPointsToLevel, updateProgressPoints, calculatePercentage, updateLevel, updateEarnedPoints, addGoal, checkGoal, completeGoalsTest, completeGoals, resetEarnedPoints, removeGoal, addReward } from './game-data.utils';
+import { precreatedGoals, precreatedRewards } from '../../test-scripts/goals-test';
 
 const INITIAL_STATE = {
     level: 1,
     lastRewardLevel: 1,
-    pointsToNextLevel: 78, //number of points to get from last level to next level
+    pointsToNextLevel: 1, //number of points to get from last level to next level
     earnedPoints: 0, //earned number of points for the level . . .earnedPoints > pointsToNextLevel means gain a level
     earnedLevelPercent: 0, //percentage of level completed
-    progressPoints: 27,
-    progressLevelPercent: 35,
+    progressPoints: 0,
+    progressLevelPercent: 0,
     nextGoalID: 13,
     goalPointTotal: 78, //total points of all the goals to get an average
     lastUpdate: null,
+    showRewardPopup: false,
     goalList: precreatedGoals,
-    completedGoalList: precreatedCompletedGoals,
+    goalCount: 12,
+    rewards: precreatedRewards,
+    
 }
 
 const gameDataReducer = (state = INITIAL_STATE, action) => {
@@ -40,6 +43,17 @@ const gameDataReducer = (state = INITIAL_STATE, action) => {
                 ...state,
                 earnedLevelPercent: calculatePercentage(state.earnedPoints,state.pointsToNextLevel) 
             };
+        case GameDataActionTypes.CALC_POINTS_TO_LEVEL:
+            return {
+                ...state,
+                pointsToNextLevel: calcPointsToLevel(state.level, state.goalPointTotal, state.goalCount),
+            }
+        case GameDataActionTypes.ADD_REWARD:
+            return {
+                ...state,
+                rewards: addReward(state.rewards, action.payload),
+            }
+
 
         //--------Goal Actions--------//
         case GameDataActionTypes.UPDATE_LEVEL:
@@ -47,12 +61,17 @@ const gameDataReducer = (state = INITIAL_STATE, action) => {
         case GameDataActionTypes.REMOVE_GOAL:
             return {
                 ...state,
+                goalList: removeGoal(state.goalList, action.payload),
+                goalPointTotal: state.goalPointTotal - action.payload.points,
+                goalCount: state.goalCount - 1,
             };
         case GameDataActionTypes.ADD_GOAL:
             return {
                 ...state,
                 goalList: addGoal(state.goalList, state.nextGoalID, action.payload),
                 nextGoalID: state.nextGoalID + 1,
+                goalPointTotal: state.goalPointTotal + action.payload.points,
+                goalCount: state.goalCount + 1,
             };
         case GameDataActionTypes.CHECK_GOAL:
             return {
@@ -66,10 +85,9 @@ const gameDataReducer = (state = INITIAL_STATE, action) => {
             };
         case GameDataActionTypes.COMPLETE_GOALS_TEST:
             {
-                const test = completeGoalsTest(state);
-                test.goalList = {...test.goalList};
-                return test;
-
+                const newState = completeGoalsTest(state);
+                newState.goalList = {...newState.goalList};
+                return newState;
             };
         case GameDataActionTypes.COMPLETE_GOALS:
             {
@@ -78,7 +96,18 @@ const gameDataReducer = (state = INITIAL_STATE, action) => {
                 return test;
 
             };
-        
+        case GameDataActionTypes.COUNT_GOALS:
+            {
+                return {
+                    ...state,
+                    goalCount: countGoals(state.goalList),
+                }
+            }
+        case GameDataActionTypes.TOGGLE_REWARD_POPUP:
+            return {
+                ...state,
+                showRewardPopup: !state.showRewardPopup,
+            };
         default:
             return {...state};
     }

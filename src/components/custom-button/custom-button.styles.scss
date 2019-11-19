@@ -2,7 +2,7 @@
 
 .custom-button {
   min-width: 40px;
-  width: auto;
+  
   height: 40px;
   letter-spacing: 0.5px;
   line-height: 40px;
@@ -14,9 +14,11 @@
   cursor: pointer;
   display: flex;
   justify-content: center;
-  margin: 5px;
   border-radius: 7px;
   border: none;
+  margin: 5px auto;
+  padding: 0 5px;
+  width: auto;
 
   &:hover {
     background-color: $color-tan;

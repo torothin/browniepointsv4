@@ -32,7 +32,7 @@ const dailyGoal_2 = {
         dayOfWeek: 4,
     },
     points: 2,
-    checked: true,
+    checked: false,
 }
 
 const dailyGoal_3 = {
@@ -116,7 +116,7 @@ const weeklyGoal_3 = {
         dayOfWeek: 7,
     },
     points: 6,
-    checked: true,
+    checked: false,
 }
 
 const monthlyGoal_1 = {
@@ -158,7 +158,7 @@ const monthlyGoal_2 = {
         dayOfWeek: 3,
     },
     points: 8,
-    checked: true,
+    checked: false,
 }
 
 const monthlyGoal_3 = {
@@ -221,7 +221,7 @@ const todo_2 = {
         dayOfWeek: 3,
     },
     points: 11,
-    checked: true,
+    checked: false,
 }
 
 const todo_3 = {
@@ -252,11 +252,10 @@ const precreatedGoals = {
     monthly: [],
 };
 
-const precreatedCompletedGoals = {
-    todo: [],
-    daily: [],
-    weekly: [],
-    monthly: [],
+const precreatedRewards = {
+    minor: ['minor1','minor2','minor3'],
+    major: ['major1','major2','major3'],
+    epic: ['epic1','epic2','epic3'],
 };
 
 precreatedGoals.todo.push(todo_1);
@@ -275,19 +274,4 @@ precreatedGoals.monthly.push(monthlyGoal_1);
 precreatedGoals.monthly.push(monthlyGoal_2);
 precreatedGoals.monthly.push(monthlyGoal_3);
 
-precreatedCompletedGoals.todo.push(todo_2);
-precreatedCompletedGoals.daily.push(dailyGoal_2);
-precreatedCompletedGoals.weekly.push(weeklyGoal_2);
-precreatedCompletedGoals.monthly.push(monthlyGoal_2);
-
-// export const precreatedGoals = () => {
-//     return goalList;
-// }
-
-// export const precreatedCompletedGoals = () => {
-//     completedGoalList
-// } 
-
-// console.log(precreatedGoals, precreatedCompletedGoals);
-
-export { precreatedGoals, precreatedCompletedGoals };
+export { precreatedGoals, precreatedRewards };

@@ -14,6 +14,10 @@ class GoalContainer extends React.Component {
         };
     }
 
+    componentDidUpdate() {
+        console.log("goal-container updated");
+    }
+
     render() {
         //console.log("goal container re-rendered");
         const {todoListShow, dailyListShow, weeklyListShow, monthlyListShow } = this.state;

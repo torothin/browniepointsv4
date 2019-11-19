@@ -60,7 +60,7 @@ class GoalList extends React.Component {
         const checked = !goal.checked;
         this.props.checkGoal(goal);
         this.props.updateProgressPoints({checked,goal}); 
-        this.props.updateProgressPercent();
+        //this.props.updateProgressPercent();
     }
 };
 

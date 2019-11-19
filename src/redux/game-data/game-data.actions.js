@@ -22,6 +22,13 @@ export const updateEarnedPercent = () => ({
     type: GameDataActionTypes.UPDATE_EARNED_PERCENT,
 });
 
+export const calcPointsToLevel = () => ({
+    type: GameDataActionTypes.CALC_POINTS_TO_LEVEL,
+});
+
+
+//------- Goal Actions -------//
+
 export const addGoal = goal => ({
     type: GameDataActionTypes.ADD_GOAL,
     payload: goal
@@ -47,4 +54,18 @@ export const completeGoals = () => ({
 
 export const resetEarnedPoints = () => ({
     type: GameDataActionTypes.RESET_EARNED_POINTS
+});
+
+export const countGoals = () => ({
+    type: GameDataActionTypes.COUNT_GOALS
+});
+
+export const toggleRewardPopup = toggle => ({
+    type: GameDataActionTypes.TOGGLE_REWARD_POPUP,
+    payload: toggle,
+});
+
+export const addReward = rewardData => ({
+    type: GameDataActionTypes.ADD_REWARD,
+    payload: rewardData,
 });
