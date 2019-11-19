@@ -1,5 +1,4 @@
 export const menuSelectionHelper = (payload, menuSelection) => {
-
     switch (payload) {
         case "Add Goal":
             return {
@@ -28,7 +27,7 @@ export const menuSelectionHelper = (payload, menuSelection) => {
                 removeGoal: false,
                 addReward: false,
                 removeReward: false,
-            }
+            };
         default:
             return menuSelection;
     }

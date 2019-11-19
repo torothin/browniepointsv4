@@ -104,7 +104,7 @@ class RemoveGoal extends React.Component {
                             ))
                         }
                     </select>
-                    <CustomButton type='submit'>Accept</CustomButton>
+                    <CustomButton wide type='submit'>Accept</CustomButton>
                 </form>
             </div>
         )

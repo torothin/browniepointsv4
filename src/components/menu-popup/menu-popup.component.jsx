@@ -8,13 +8,10 @@ import AddReward from '../add-reward/add-reward.component';
 import RemoveGoal from '../remove-goal/remove-goal.component';
 import RemoveReward from '../remove-reward/remove-reward.component';
 
-const MenuPopup = ({ toggleMenuPopupShow, selectedMenu }) => (
+const MenuPopup = ({ toggleMenuPopupShow, selectedMenu, menuSelection }) => (
     <div className='menu-popup-background'>
         <div className='menu-popup'>
             <div className='popup-contents'>
-                {
-                    console.log(selectedMenu)
-                }
                 {
                     selectedMenu.addGoal
                     ?
@@ -48,6 +45,7 @@ const MenuPopup = ({ toggleMenuPopupShow, selectedMenu }) => (
             <div className='button-container'>
                 <CustomButton
                     id='popupButton' 
+                    wide
                     onClick = { ()=> { 
                         toggleMenuPopupShow("cancel");
                         menuSelection("Close Popup");

@@ -2,11 +2,9 @@
 
 .custom-button {
   min-width: 40px;
-  
   height: 40px;
   letter-spacing: 0.5px;
   line-height: 40px;
-  padding: 0 5px 0 5px;
   font-size: 15px;
   background-color: $color-purple;
   color: $color-white;
@@ -16,9 +14,10 @@
   justify-content: center;
   border-radius: 7px;
   border: none;
-  margin: 5px auto;
+  margin: 5px;
   padding: 0 5px;
   width: auto;
+  outline: none;
 
   &:hover {
     background-color: $color-tan;
@@ -39,9 +38,14 @@
     }
   }
 
-  &.nomargin {
-    margin: 0;
-    padding: 0;
+  &.wide {
+    margin: 5px auto;
+    width: 95%;
+  }
+
+  &.fullwidth {
+    margin: 5px 0;
+    width: 100%;
   }
 
   & img {

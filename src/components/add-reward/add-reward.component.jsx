@@ -2,10 +2,10 @@ import React from 'react';
 import './add-reward.styles.scss';
 import CustomButton from '../custom-button/custom-button.component';
 import { connect } from 'react-redux';
-import { addReward, toggleRewardPopup } from '../../redux/game-data/game-data.actions';
+import { addReward } from '../../redux/game-data/game-data.actions';
 
 
-const AddReward = ({goalType, toggleRewardPopup, addReward}) => (
+const AddReward = ({goalType, addReward}) => (
     <div className='add-reward-container'>
         Add Reward
         <input className="reward-name" type="text" 
@@ -18,10 +18,9 @@ const AddReward = ({goalType, toggleRewardPopup, addReward}) => (
             <option>Major</option>
             <option>Epic</option>
         </select>
-        <CustomButton onClick={() => {
+        <CustomButton wide onClick={() => {
             const rewardData = {rewardName:'test1',rewardType:'epic'};
             addReward(rewardData);
-            toggleRewardPopup();
         }}>
             Accept
         </CustomButton>
@@ -30,7 +29,6 @@ const AddReward = ({goalType, toggleRewardPopup, addReward}) => (
 
 const mapDispatchToProps = dispatch => ({
     addReward: rewardData => dispatch(addReward(rewardData)),
-    toggleRewardPopup: dispatch(toggleRewardPopup()),
 })
 
 export default connect(null,mapDispatchToProps)(AddReward);

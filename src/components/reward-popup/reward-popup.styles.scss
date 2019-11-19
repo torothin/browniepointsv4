@@ -14,7 +14,7 @@
 .reward-popup {
     background-color: $color-light-grey;
     width: 300px;
-    height: 300px;
+    height: 350px;
     margin: 150px auto;
     text-align: center;
     padding:10px;
@@ -23,7 +23,7 @@
 }
 
 .popup-contents {
-    height: 1000px;
+    height: 100%;
     width: 250px;
     margin: 10px auto;
     // border: solid 2px blue;
@@ -34,10 +34,10 @@
 }
 
 .reward-image-container {
-    height: 100%;
+    //height: 100%;
 }
 
 .button-container {
-    margin: auto 20px;
+    margin: auto;
 
 }

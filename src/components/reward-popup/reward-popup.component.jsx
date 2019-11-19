@@ -10,7 +10,7 @@ const RewardPopup = ({level, dispatch}) => (
         <div className='reward-popup'>
             <div className='popup-contents'>
                 <div className='reward-image-container'>
-                    <RewardImage level={level} />
+                    <RewardImage popup level={level} />
                 </div>
                 
                 <div className='reward-type-container'>
@@ -18,6 +18,7 @@ const RewardPopup = ({level, dispatch}) => (
                 </div>
                 <div className='button-container'>
                     <CustomButton 
+                        wide
                         onClick = {() => { dispatch(toggleRewardPopup()) }}>Accept
                     </CustomButton>
                 </div>
@@ -27,8 +28,8 @@ const RewardPopup = ({level, dispatch}) => (
 )
 
 const rewardType = (level) => {
-    if(level % 15 === 0) return "Epic Reward";
-    else if(level % 5 === 0) return "Major Reward";
+    if(level % 3 === 0) return "Epic Reward";
+    else if(level % 2 === 0) return "Major Reward";
     else return "Minor Reward";
 }
 

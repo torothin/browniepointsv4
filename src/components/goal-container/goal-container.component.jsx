@@ -24,22 +24,22 @@ class GoalContainer extends React.Component {
         return(
             <div className='goal-container'>
                 
-                <CustomButton onClick={ this.toggleTodoList }> ToDos </CustomButton>
+                <CustomButton fullwidth onClick={ this.toggleTodoList }> ToDos </CustomButton>
                 { 
                     todoListShow && <GoalList goalType='todo' /> 
                 }
                 
-                <CustomButton onClick={ this.toggleDailyList }> Daily Goals </CustomButton>
+                <CustomButton fullwidth onClick={ this.toggleDailyList }> Daily Goals </CustomButton>
                 { 
                     dailyListShow && <GoalList goalType='daily' /> 
                 }
                 
-                <CustomButton onClick={ this.toggleWeeklyList }> Weekly Goals </CustomButton>
+                <CustomButton fullwidth onClick={ this.toggleWeeklyList }> Weekly Goals </CustomButton>
                 { 
                     weeklyListShow && <GoalList goalType='weekly' /> 
                 }
 
-                <CustomButton onClick={ this.toggleMonthlyList }> Monthly Goals </CustomButton>
+                <CustomButton fullwidth onClick={ this.toggleMonthlyList }> Monthly Goals </CustomButton>
                 { 
                     monthlyListShow && <GoalList goalType='monthly' /> 
                 }

@@ -6,20 +6,20 @@ import MajorImage from '../assets/reward-2.jpg';
 import MinorImage from '../assets/reward-1.jpg';
 
 const rewardString = (level) => {
-    
-    if(level % 15 === 0) return EpicImage;
-    else if(level % 5 === 0) return MajorImage;
+
+    if( level % 3 === 0) return EpicImage;
+    else if( level % 2 === 0) return MajorImage;
     else return MinorImage;
    
 }
 
-const RewardImage = ({level}) => (
+const RewardImage = ({level, popup}) => (
     <div className='reward-image-container'>
         {
             <img 
                 className='reward-image' 
                 alt='Reward'
-                src={ rewardString(level) } 
+                src={ popup ? rewardString(level - 1) : rewardString(level) } 
             />
         }    
     </div>

@@ -78,7 +78,7 @@ class AddGoal extends React.Component {
                         <option value='weekly'>Weekly</option>
                         <option value='monthly'>Monthly</option>
                     </select>
-                    <CustomButton type='submit'>
+                    <CustomButton wide type='submit'>
                         Accept
                     </CustomButton>
                 </form>

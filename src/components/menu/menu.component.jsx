@@ -9,6 +9,7 @@ const Menu = ({ toggleMenuPopupShow, toggleMenuHidden, menuSelection }) => (
         <div className='menu'>
             <CustomButton
                 inverted
+                wide
                 onClick = { () => {
                     menuSelection("Add Goal");
                     toggleMenuPopupShow();
@@ -16,6 +17,7 @@ const Menu = ({ toggleMenuPopupShow, toggleMenuHidden, menuSelection }) => (
                 } }>Add Goal</CustomButton>
             <CustomButton
                 inverted
+                wide
                 onClick = { () => {
                     menuSelection("Remove Goal");
                     toggleMenuPopupShow();
@@ -23,6 +25,7 @@ const Menu = ({ toggleMenuPopupShow, toggleMenuHidden, menuSelection }) => (
                 } }>Remove Goal</CustomButton>
             <CustomButton
                 inverted
+                wide
                 onClick = { () => {
                     menuSelection("Add Reward");
                     toggleMenuPopupShow();
@@ -30,6 +33,7 @@ const Menu = ({ toggleMenuPopupShow, toggleMenuHidden, menuSelection }) => (
                 } }>Add Reward</CustomButton>
             <CustomButton 
                 inverted
+                wide
                 onClick = { () => {
                     menuSelection("Remove Reward");
                     toggleMenuPopupShow();
@@ -37,6 +41,7 @@ const Menu = ({ toggleMenuPopupShow, toggleMenuHidden, menuSelection }) => (
                 } }>Remove Reward</CustomButton>
             <CustomButton
                 inverted
+                wide
                 onClick = { () => {
                     toggleMenuPopupShow();
                     toggleMenuHidden();
