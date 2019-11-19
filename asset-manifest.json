@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/browniepointsv4/static/css/main.8ce98189.chunk.css",
-    "main.js": "/browniepointsv4/static/js/main.e5853c06.chunk.js",
-    "main.js.map": "/browniepointsv4/static/js/main.e5853c06.chunk.js.map",
+    "main.css": "/browniepointsv4/static/css/main.6a7ade7d.chunk.css",
+    "main.js": "/browniepointsv4/static/js/main.3566f3a8.chunk.js",
+    "main.js.map": "/browniepointsv4/static/js/main.3566f3a8.chunk.js.map",
     "runtime-main.js": "/browniepointsv4/static/js/runtime-main.34bde011.js",
     "runtime-main.js.map": "/browniepointsv4/static/js/runtime-main.34bde011.js.map",
     "static/js/2.4677b577.chunk.js": "/browniepointsv4/static/js/2.4677b577.chunk.js",
     "static/js/2.4677b577.chunk.js.map": "/browniepointsv4/static/js/2.4677b577.chunk.js.map",
     "index.html": "/browniepointsv4/index.html",
-    "precache-manifest.137013ec8d0add1df53349e3e83274ac.js": "/browniepointsv4/precache-manifest.137013ec8d0add1df53349e3e83274ac.js",
+    "precache-manifest.617635de4b385463b4534e4a45b871ec.js": "/browniepointsv4/precache-manifest.617635de4b385463b4534e4a45b871ec.js",
     "service-worker.js": "/browniepointsv4/service-worker.js",
-    "static/css/main.8ce98189.chunk.css.map": "/browniepointsv4/static/css/main.8ce98189.chunk.css.map",
+    "static/css/main.6a7ade7d.chunk.css.map": "/browniepointsv4/static/css/main.6a7ade7d.chunk.css.map",
     "static/media/reward-1.jpg": "/browniepointsv4/static/media/reward-1.13b0d4c5.jpg",
     "static/media/reward-2.jpg": "/browniepointsv4/static/media/reward-2.1296743d.jpg",
     "static/media/reward-3.jpg": "/browniepointsv4/static/media/reward-3.f6e4f133.jpg"
@@ -18,7 +18,7 @@
   "entrypoints": [
     "static/js/runtime-main.34bde011.js",
     "static/js/2.4677b577.chunk.js",
-    "static/css/main.8ce98189.chunk.css",
-    "static/js/main.e5853c06.chunk.js"
+    "static/css/main.6a7ade7d.chunk.css",
+    "static/js/main.3566f3a8.chunk.js"
   ]
 }
