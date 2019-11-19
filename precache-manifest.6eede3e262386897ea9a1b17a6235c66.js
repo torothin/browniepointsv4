@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "ab0a1e508eaff46c2e51c0b4bbbb5a4a",
+    "revision": "4e2dfb6ad7a6a87316b85e5f25b7217f",
     "url": "/browniepointsv4/index.html"
   },
   {
-    "revision": "ff0a89a40d01c83d773a",
+    "revision": "64e82f3511f27de25df0",
     "url": "/browniepointsv4/static/css/main.6a7ade7d.chunk.css"
   },
   {
@@ -12,8 +12,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/browniepointsv4/static/js/2.4677b577.chunk.js"
   },
   {
-    "revision": "ff0a89a40d01c83d773a",
-    "url": "/browniepointsv4/static/js/main.3566f3a8.chunk.js"
+    "revision": "64e82f3511f27de25df0",
+    "url": "/browniepointsv4/static/js/main.96958599.chunk.js"
   },
   {
     "revision": "a9281abd1fb4c896b91f",
