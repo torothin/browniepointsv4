@@ -5,7 +5,7 @@ import CustomButton from '../custom-button/custom-button.component';
 import { connect } from 'react-redux';
 import { toggleRewardPopup } from '../../redux/game-data/game-data.actions';
 
-const RewardPopup = ({level, dispatch}) => (
+const RewardPopup = ({level, rewardList, dispatch}) => (
     <div className='reward-popup-background'>
         <div className='reward-popup'>
             <div className='popup-contents'>
@@ -14,7 +14,9 @@ const RewardPopup = ({level, dispatch}) => (
                 </div>
                 
                 <div className='reward-type-container'>
-                    { rewardType({level}) }
+                    { rewardText(rewardType(level)) }
+                    <br/><br/>
+                    { randomReward( rewardList ,rewardType(level)) }
                 </div>
                 <div className='button-container'>
                     <CustomButton 
@@ -28,9 +30,25 @@ const RewardPopup = ({level, dispatch}) => (
 )
 
 const rewardType = (level) => {
-    if(level % 3 === 0) return "Epic Reward";
-    else if(level % 2 === 0) return "Major Reward";
+    level -= 1;
+    if(level % 3 === 0) return 'epic';
+    else if(level % 2 === 0) return 'major';
+    else return 'minor';
+}
+
+const rewardText = (rewardType) => {
+    if(rewardType === 'epic') return "Epic Reward";
+    else if(rewardType === 'major') return "Major Reward";
     else return "Minor Reward";
 }
 
-export default connect(null)(RewardPopup);
+const randomReward = (rewardList, rewardType) => {
+    const myArray = rewardList[rewardType];
+    return myArray[Math.floor(Math.random() * myArray.length)];
+}
+
+const mapStateToProps = state => ({
+    rewardList: state.gameData.rewards,
+})
+
+export default connect(mapStateToProps)(RewardPopup);

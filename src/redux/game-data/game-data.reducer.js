@@ -1,6 +1,7 @@
 import { GameDataActionTypes } from './game-data.types';
 import { countGoals, calcPointsToLevel, updateProgressPoints, calculatePercentage, updateLevel, updateEarnedPoints, addGoal, checkGoal, completeGoalsTest, completeGoals, resetEarnedPoints, removeGoal, addReward } from './game-data.utils';
 import { precreatedGoals, precreatedRewards } from '../../test-scripts/goals-test';
+import { removeReward } from './game-data.actions';
 
 const INITIAL_STATE = {
     level: 1,
@@ -52,6 +53,11 @@ const gameDataReducer = (state = INITIAL_STATE, action) => {
             return {
                 ...state,
                 rewards: addReward(state.rewards, action.payload),
+            }
+        case GameDataActionTypes.REMOVE_REWARD:
+            return {
+                ...state,
+                rewards: removeReward(state.rewards, action.payload),
             }
 
 

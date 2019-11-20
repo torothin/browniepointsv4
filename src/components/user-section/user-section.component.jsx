@@ -110,9 +110,7 @@ class UserSection extends React.Component {
 
         if(totalPercent > 100) return 100;
         else return totalPercent;
-
     }
-    
 };
 
 // remove when done testing

@@ -69,3 +69,8 @@ export const addReward = rewardData => ({
     type: GameDataActionTypes.ADD_REWARD,
     payload: rewardData,
 });
+
+export const removeReward = rewardData => ({
+    type: GameDataActionTypes.REMOVE_REWARD,
+    payload: rewardData,
+});
