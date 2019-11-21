@@ -39,13 +39,13 @@ const Menu = ({ toggleMenuPopupShow, toggleMenuHidden, menuSelection }) => (
                     toggleMenuPopupShow();
                     toggleMenuHidden();
                 } }>Remove Reward</CustomButton>
-            <CustomButton
+            {/* <CustomButton
                 inverted
                 wide
                 onClick = { () => {
                     toggleMenuPopupShow();
                     toggleMenuHidden();
-                } }>Option 5</CustomButton>
+                } }>Option 5</CustomButton> */}
             
         </div>
     </div>

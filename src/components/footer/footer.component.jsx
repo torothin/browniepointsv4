@@ -7,7 +7,7 @@ const Footer = () => (
     Comments send to: <a href="mailto:bradford.duvall@gmail.com">bradford.duvall@gmail.com</a>
     <p>I am open to new job opportunities as a Developer: </p>
     <a href="https://torothin.github.io/website/index.html">Homepage</a>
-    <p>version 4.01.03</p>
+    <p>version 4.01.04</p>
 
   </div>
 )

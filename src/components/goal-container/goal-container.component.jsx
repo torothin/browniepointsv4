@@ -15,7 +15,7 @@ class GoalContainer extends React.Component {
     }
 
     componentDidUpdate() {
-        console.log("goal-container updated");
+        //console.log("goal-container updated");
     }
 
     render() {

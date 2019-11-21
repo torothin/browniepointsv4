@@ -1,7 +1,6 @@
 import { GameDataActionTypes } from './game-data.types';
-import { countGoals, calcPointsToLevel, updateProgressPoints, calculatePercentage, updateLevel, updateEarnedPoints, addGoal, checkGoal, completeGoalsTest, completeGoals, resetEarnedPoints, removeGoal, addReward } from './game-data.utils';
+import { countGoals, calcPointsToLevel, updateProgressPoints, calculatePercentage, updateLevel, updateEarnedPoints, addGoal, checkGoal, completeGoalsTest, completeGoals, resetEarnedPoints, removeGoal, addReward, removeReward } from './game-data.utils';
 import { precreatedGoals, precreatedRewards } from '../../test-scripts/goals-test';
-import { removeReward } from './game-data.actions';
 
 const INITIAL_STATE = {
     level: 1,
@@ -18,7 +17,6 @@ const INITIAL_STATE = {
     goalList: precreatedGoals,
     goalCount: 12,
     rewards: precreatedRewards,
-    
 }
 
 const gameDataReducer = (state = INITIAL_STATE, action) => {

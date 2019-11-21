@@ -354,12 +354,17 @@ export const calcPointsToLevel = (level, goalPoints, goalCount) => {
 }
 
 export const addReward = (rewardList, rewardData) => {
-    console.log(rewardList, rewardData.rewardName, rewardData.rewardType);
     rewardList[rewardData.rewardType].push(rewardData.rewardName);
-    console.log(rewardList);
     return {...rewardList};
 }
 
 export const removeReward = (rewardList, rewardData) => {
-    return {...rewardList};
+    const {rewardName, rewardType} = rewardData;
+    const newArray = rewardList[rewardType].filter(reward => 
+    {
+        return rewardName !== reward;
+    })
+    rewardList[rewardType] = newArray;
+
+    return rewardList;
 }

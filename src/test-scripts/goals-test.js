@@ -252,6 +252,18 @@ const precreatedGoals = {
     monthly: [],
 };
 
+// const precreatedRewards = {
+//     minor: [{rewardName:'minor1', rewardType: 'minor'},
+//             {rewardName:'minor2', rewardType: 'minor'},
+//             {rewardName:'minor3', rewardType: 'minor'},],
+//     major: [{rewardName:'major1', rewardType: 'major'},
+//             {rewardName:'major2', rewardType: 'major'},
+//             {rewardName:'major3', rewardType: 'major'},],
+//     epic: [{rewardName:'epic1', rewardType: 'epic'},
+//             {rewardName:'epic2', rewardType: 'epic'},
+//             {rewardName:'epic3', rewardType: 'epic'},],
+// };
+
 const precreatedRewards = {
     minor: ['minor1','minor2','minor3'],
     major: ['major1','major2','major3'],

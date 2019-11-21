@@ -67,6 +67,7 @@ class RemoveGoal extends React.Component {
 
     handleChange = event => {
         const { name, value } = event.target;
+        console.log(event.target)
         this.setState({ [name]: value });
     }
 
@@ -82,7 +83,7 @@ class RemoveGoal extends React.Component {
                         name='goalIDToBeRemoved'
                         
                         >
-                        <option selected hidden disabled>Select Goal:</option>
+                        <option value=''>Select Goal:</option>
                         {
                             goalList['todo'].map(goal => (
                                 <option value={ goal.ID } key={ goal.ID }>{ goal.name }</option>
