@@ -1,8 +1,10 @@
 import { createStore, applyMiddleware } from 'redux';
 import logger from 'redux-logger'; // for debugging
 import rootReducer from './root-reducer';
+import thunk from 'redux-thunk'
+import thunkMiddleware from 'redux-thunk'
 
-const middlewares = [logger];  //done this way so that we can add to the middlewares array later if needed
+const middlewares = [logger,thunk,thunkMiddleware];  //done this way so that we can add to the middlewares array later if needed
 
 const store = createStore(rootReducer, applyMiddleware(...middlewares));
 

@@ -1,4 +1,6 @@
 import { GameDataActionTypes } from './game-data.types';
+import { firestore } from '../../firebase/firebase.utils';
+
 
 export const updateProgressPoints = ({checked,goal}) => ({
     type: GameDataActionTypes.UPDATE_PROGRESS_POINTS,
@@ -74,3 +76,28 @@ export const removeReward = rewardData => ({
     type: GameDataActionTypes.REMOVE_REWARD,
     payload: rewardData,
 });
+
+export const saveState = (currentUser) => ({
+    type: GameDataActionTypes.SAVE_STATE,
+    payload: currentUser,
+});
+
+export const setData = (newState) => ({
+    type: GameDataActionTypes.SET_DATA,
+    payload: newState,
+});
+
+export const getState = (currentUser) => { 
+    const currentUserID = currentUser.uid ? currentUser.uid : currentUser.id;
+    return (dispatch) => {
+        const gameDataDocRef = firestore.collection("gameData").doc(`${ currentUserID }`);
+
+        gameDataDocRef.get()
+            .then( doc => {
+                dispatch(setData(doc.data()));
+            } )
+                
+    }
+}
+
+

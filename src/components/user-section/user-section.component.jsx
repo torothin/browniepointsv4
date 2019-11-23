@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import CustomButton from '../custom-button/custom-button.component';
 import RewardImage from '../reward-image/reward-image.component';
 import RewardPopup from '../reward-popup/reward-popup.component';
+
 import {  
             completeGoalsTest, 
             updateLevel,
@@ -13,6 +14,8 @@ import {
             updateProgressPercent,
             countGoals,
             toggleRewardPopup,
+            saveState,
+            getState,
         } from '../../redux/game-data/game-data.actions';
 
 class UserSection extends React.Component { 
@@ -25,8 +28,13 @@ class UserSection extends React.Component {
     } 
 
     componentDidUpdate () {
-        //console.log("user section updated");
+        //console.log(this.props.currentUser.getIDToken());
         this.updateLevel(this.props.level);
+        
+    }
+
+    componentWillMount () {
+        
     }
 
     componentDidMount () {
@@ -85,6 +93,12 @@ class UserSection extends React.Component {
                         
                         
                     }}>Check Completion (AutoUpdate on: {`${this.state.autoUpdate})`}</CustomButton>
+                    <CustomButton onClick ={() => {
+                        this.props.saveState(this.props.currentUser);
+                    }}>Save to Database</CustomButton>
+                    <CustomButton onClick ={() => {
+                        this.props.getState(this.props.currentUser);
+                    }}>Get from Database</CustomButton>
             </div>
         )}
     
@@ -123,7 +137,8 @@ const mapDispatchToProps = dispatch => ({
     updateProgressPercent: () => dispatch(updateProgressPercent()),
     countGoals: () => dispatch(countGoals()),
     toggleRewardPopup: () => dispatch(toggleRewardPopup()),
-
+    saveState: currentUser => dispatch(saveState(currentUser)),
+    getState: currentUser => dispatch(getState(currentUser)),
 });
 
 const mapStateToProps = state => ({
@@ -132,7 +147,6 @@ const mapStateToProps = state => ({
     progressLevelPercent: state.gameData.progressLevelPercent,
     earnedLevelPercent: state.gameData.earnedLevelPercent,
     showRewardPopup: state.gameData.showRewardPopup,
-
 });
 
 export default connect(mapStateToProps,mapDispatchToProps)(UserSection);

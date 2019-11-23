@@ -16,10 +16,10 @@ class AddGoal extends React.Component {
             menuPopupShow: false,
             toggleMenuPopupShow: false,
             
-            name: "Test",
-            type: "daily",
-            ID: 20,
-            points: 20,
+            name: "",
+            type: "",
+            ID: 0,
+            points: 0,
             
         }
     }

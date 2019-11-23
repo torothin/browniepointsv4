@@ -26,18 +26,10 @@ class SignIn extends React.Component {
         } catch (error) {
             console.error(error);
         }
-
-
     }
 
     handleChange = event => {
         const { value, name } = event.target;
-
-        // why [name]?
-        // seems that by placing it in [] it becomes a variable such that then name of the event.target is used
-        // then the value is applied so if email is changed then event.target.name is email and so setState assigns
-        // value to [name] which is email
-
         this.setState({ [name]:value });
     }
 

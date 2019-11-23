@@ -2,6 +2,8 @@ import { newBasicDate, leftGreaterRight,
     leftGreaterOrEqualRight, newCheckedDate } from '../../helpers/basic-date.helper';
 import { calcNextLevel } from '../../helpers/level-curve.helper';
 
+import { firestore } from '../../firebase/firebase.utils';
+
 export const addGoal = (currentGoals, goalID, newGoal) => {
     
     const newGoalList = {...currentGoals};
@@ -367,4 +369,32 @@ export const removeReward = (rewardList, rewardData) => {
     rewardList[rewardType] = newArray;
 
     return rewardList;
+}
+
+export const saveState = (state,currentUser) => {
+    const savedState = state;
+    
+    if(currentUser.id && currentUser.email)
+        {
+            // currentUser.getIdToken()
+            //     .then( async (token) => {
+            //         // this.$http.put('https://browniepoints-v4.firebaseio.com/storage/' + currentUser.uid 
+            //         //         + '.json?auth=' + token ,savedState)
+            //         const url = 'https://browniepoints-v4.firebaseio.com/storage/' + currentUser.uid 
+            //                     // + '.json?auth=' + token;
+                    
+            //         firestore.collection('gameData').doc(`${ currentUser.uid }`).set(savedState);
+
+            //     });
+            firestore.collection('gameData').doc(`${ currentUser.id }`).set(savedState);
+            return newBasicDate();
+        }
+
+        return null;
+    
+}
+
+export const setData = (oldState,newState) => {
+    if(newState) return newState
+    else return oldState
 }

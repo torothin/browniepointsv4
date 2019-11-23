@@ -1,7 +1,7 @@
 import React from 'react';
 import CustomButton from '../custom-button/custom-button.component';
 import { connect } from 'react-redux';
-import { toggleMenuPopupShow } from '../../redux/menu/menu.actions';
+import { toggleMenuPopupShow, menuSelection } from '../../redux/menu/menu.actions';
 import { checkGoal, updateProgressPoints, updateProgressPercent } from '../../redux/game-data/game-data.actions';
 import CheckBox from '../check-box/check-box.component';
 
@@ -10,19 +10,15 @@ import './goal-list.styles.scss';
 class GoalList extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            
-        };
+        this.state = {};
     }
 
     componentDidUpdate() {
-        //console.log('goal-list update')
         this.props.updateProgressPercent();
     }
 
     render() {
-        //console.log("rendered goal-list");
-        const { goalType, toggleMenuPopupShow } = this.props; //checkGoal, updateProgressPoints, updateProgressPercent
+        const { goalType, toggleMenuPopupShow, menuSelection } = this.props;
         const goalArray = this.props.goalList[goalType];
         
         return ( 
@@ -31,7 +27,6 @@ class GoalList extends React.Component {
                     {
                         goalArray && goalArray.map(goal => (
                             <li key={ goal.ID } onChange={()=>{ 
-                                //console.log("onchange");
                                 this.handleChange(goal);
                             }}> 
                                 <CheckBox goal={ goal } goalchecked={ goal.checked }  />
@@ -40,7 +35,11 @@ class GoalList extends React.Component {
                             </li>
                         ))
                     }
-                    <CustomButton onClick={ toggleMenuPopupShow } inverted>
+                    <CustomButton onClick={ ()=>{
+                            menuSelection("Add Goal");
+                            toggleMenuPopupShow(goalType);
+                        }} 
+                        inverted>
                         <div className='add-goal-button'>
                             <span>&#43;</span>
                         </div>
@@ -65,10 +64,11 @@ class GoalList extends React.Component {
 };
 
 const mapDispatchToProps = dispatch => ({
-    toggleMenuPopupShow: () => dispatch(toggleMenuPopupShow()),
+    toggleMenuPopupShow: selection => dispatch(toggleMenuPopupShow(selection)),
     checkGoal: goal => dispatch(checkGoal(goal)),
     updateProgressPoints: goal => dispatch(updateProgressPoints(goal)),
     updateProgressPercent: () => dispatch(updateProgressPercent()),
+    menuSelection: selection => dispatch(menuSelection(selection)),
 });
 
 const mapStateToProps = state => ({

@@ -18,12 +18,14 @@ import { auth, createUserProfileDocument } from './firebase/firebase.utils';
 import { connect } from 'react-redux';
 import { setCurrentUser } from './redux/user/user.actions';
 
+import { getState } from './redux/game-data/game-data.actions';
+
 class App extends React.Component {
 
   unsubscribeFromAuth = null
 
   componentDidMount() {
-    const {setCurrentUser} = this.props;
+    const { setCurrentUser,getState } = this.props;
 
     this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
       if(userAuth) {
@@ -35,11 +37,14 @@ class App extends React.Component {
             id: snapShot.id,
             ...snapShot.data()
           });
+          
         });
       }
-
+      
       setCurrentUser(userAuth);
-    });
+      getState(userAuth);
+    })
+    
   }
 
   componentWillUnmount() {
@@ -84,7 +89,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  setCurrentUser: user => dispatch(setCurrentUser(user))
+  setCurrentUser: user => dispatch(setCurrentUser(user)),
+  getState: user => dispatch(getState(user)),
 })
 
 export default connect(mapStateToProps,mapDispatchToProps)(App);

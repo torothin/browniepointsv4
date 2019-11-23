@@ -1,5 +1,9 @@
 import { GameDataActionTypes } from './game-data.types';
-import { countGoals, calcPointsToLevel, updateProgressPoints, calculatePercentage, updateLevel, updateEarnedPoints, addGoal, checkGoal, completeGoalsTest, completeGoals, resetEarnedPoints, removeGoal, addReward, removeReward } from './game-data.utils';
+import { countGoals, calcPointsToLevel, updateProgressPoints, 
+            calculatePercentage, updateLevel, updateEarnedPoints, 
+            addGoal, checkGoal, completeGoalsTest, completeGoals, 
+            resetEarnedPoints, removeGoal, addReward, removeReward,
+            saveState, setData } from './game-data.utils'; //getState, requestData
 import { precreatedGoals, precreatedRewards } from '../../test-scripts/goals-test';
 
 const INITIAL_STATE = {
@@ -17,6 +21,7 @@ const INITIAL_STATE = {
     goalList: precreatedGoals,
     goalCount: 12,
     rewards: precreatedRewards,
+    lastSave: null,
 }
 
 const gameDataReducer = (state = INITIAL_STATE, action) => {
@@ -112,6 +117,20 @@ const gameDataReducer = (state = INITIAL_STATE, action) => {
                 ...state,
                 showRewardPopup: !state.showRewardPopup,
             };
+
+        //--------Database Actions--------//
+
+        case GameDataActionTypes.SAVE_STATE:
+            return {
+                ...state,
+                lastSave: saveState(state, action.payload),
+            };
+        
+        case GameDataActionTypes.SET_DATA:
+            const newState = setData(state, action.payload);
+            newState.goalList = {...newState.goalList};
+            return newState;
+        
         default:
             return {...state};
     }
