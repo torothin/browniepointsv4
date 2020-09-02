@@ -1,24 +1,22 @@
 {
   "files": {
-    "main.css": "/browniepointsv4/static/css/main.276eab5e.chunk.css",
-    "main.js": "/browniepointsv4/static/js/main.4ff47d8d.chunk.js",
-    "main.js.map": "/browniepointsv4/static/js/main.4ff47d8d.chunk.js.map",
-    "runtime-main.js": "/browniepointsv4/static/js/runtime-main.34bde011.js",
-    "runtime-main.js.map": "/browniepointsv4/static/js/runtime-main.34bde011.js.map",
-    "static/js/2.bcd7b50c.chunk.js": "/browniepointsv4/static/js/2.bcd7b50c.chunk.js",
-    "static/js/2.bcd7b50c.chunk.js.map": "/browniepointsv4/static/js/2.bcd7b50c.chunk.js.map",
+    "main.css": "/browniepointsv4/static/css/main.17b4f65e.chunk.css",
+    "main.js": "/browniepointsv4/static/js/main.ab43cce3.chunk.js",
+    "main.js.map": "/browniepointsv4/static/js/main.ab43cce3.chunk.js.map",
+    "runtime-main.js": "/browniepointsv4/static/js/runtime-main.64049450.js",
+    "runtime-main.js.map": "/browniepointsv4/static/js/runtime-main.64049450.js.map",
+    "static/js/2.874da245.chunk.js": "/browniepointsv4/static/js/2.874da245.chunk.js",
+    "static/js/2.874da245.chunk.js.map": "/browniepointsv4/static/js/2.874da245.chunk.js.map",
     "index.html": "/browniepointsv4/index.html",
-    "precache-manifest.4dda2e563fc28e24f741891f465da9f9.js": "/browniepointsv4/precache-manifest.4dda2e563fc28e24f741891f465da9f9.js",
+    "precache-manifest.7422ed76a23ae7a5817913af88d02902.js": "/browniepointsv4/precache-manifest.7422ed76a23ae7a5817913af88d02902.js",
     "service-worker.js": "/browniepointsv4/service-worker.js",
-    "static/css/main.276eab5e.chunk.css.map": "/browniepointsv4/static/css/main.276eab5e.chunk.css.map",
-    "static/media/reward-1.jpg": "/browniepointsv4/static/media/reward-1.13b0d4c5.jpg",
-    "static/media/reward-2.jpg": "/browniepointsv4/static/media/reward-2.1296743d.jpg",
-    "static/media/reward-3.jpg": "/browniepointsv4/static/media/reward-3.f6e4f133.jpg"
+    "static/css/main.17b4f65e.chunk.css.map": "/browniepointsv4/static/css/main.17b4f65e.chunk.css.map",
+    "static/js/2.874da245.chunk.js.LICENSE.txt": "/browniepointsv4/static/js/2.874da245.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.34bde011.js",
-    "static/js/2.bcd7b50c.chunk.js",
-    "static/css/main.276eab5e.chunk.css",
-    "static/js/main.4ff47d8d.chunk.js"
+    "static/js/runtime-main.64049450.js",
+    "static/js/2.874da245.chunk.js",
+    "static/css/main.17b4f65e.chunk.css",
+    "static/js/main.ab43cce3.chunk.js"
   ]
 }
